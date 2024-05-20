@@ -5,7 +5,7 @@ import HomeScreen from './screens/Home';
 import Screen1 from './screens/Screen1';
 import Screen2 from './screens/Screen2';
 import Screen3 from './screens/Screen3';
-import Background from './components/Bred';
+import Screen4 from './screens/Screen4';
 import BottomNavbar from './components/Navbar';
 
 export default function App() {
@@ -22,7 +22,6 @@ export default function App() {
   };
 
   return (
-    <Background>
       <View style={styles.container}>
         {!loggedIn ? (
           <LoginScreen onLogin={handleLogin} />
@@ -32,13 +31,13 @@ export default function App() {
             {currentScreen === 'Screen1' && <Screen1 />}
             {currentScreen === 'Screen2' && <Screen2 />}
             {currentScreen === 'Screen3' && <Screen3 />}
+            {currentScreen === 'Screen4' && <Screen4 />}
             {/* Bottom Navbar */}
             <BottomNavbar navigateToScreen={navigateToScreen} />
           </>
         )}
         <StatusBar style="auto" />
       </View>
-    </Background>
   );
 }
 

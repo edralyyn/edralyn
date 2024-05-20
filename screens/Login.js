@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, Dimensions } from 'react-native';
+import Background from '../components/Bred';
 
 const { height } = Dimensions.get('window'); // Get the height of the screen
 
 const LoginScreen = ({ onLogin }) => {
   return (
+    <Background>
     <View style={styles.bottomform}>
       <TouchableOpacity style={[styles.button, styles.googleButton]} onPress={onLogin}>
               <Image
@@ -36,6 +38,7 @@ const LoginScreen = ({ onLogin }) => {
               <Text style={[styles.buttonText, styles.emailButtonText]}>Continue with email</Text>
             </TouchableOpacity>
     </View>
+    </Background>
   );
 }
 
