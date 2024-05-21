@@ -1,7 +1,6 @@
-// App.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
+import * as Permissions from 'expo-permissions';
 import LoginScreen from './screens/Login';
 import HomeScreen from './screens/Home';
 import Screen1 from './screens/Screen1';
@@ -32,6 +31,17 @@ export default function App() {
   const navigateToScreen = (screen) => {
     setCurrentScreen(screen);
   };
+
+  useEffect(() => {
+    async function requestCameraPermission() {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA);
+      if (status !== 'granted') {
+        alert('Permission to access camera is required!');
+      }
+    }
+
+    requestCameraPermission();
+  }, []);
 
   return (
     <View style={styles.container}>
