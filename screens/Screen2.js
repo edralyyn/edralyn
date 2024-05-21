@@ -9,7 +9,7 @@ const Screen2 = ({ navigateToScreen, isGuest }) => { // Receive isGuest prop
 
   return (
     <BackGround>
-    <View style={styles.container}>
+    <View style={styles.bottomform}>
       <Text>Hi, I'm Screen 2</Text>
       {!isGuest && ( // Only show button if not a guest
         <TouchableOpacity onPress={goToHome} style={styles.button}>
@@ -36,6 +36,17 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 16,
+  },
+  bottomform: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    height: '50%',
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
 });
 
