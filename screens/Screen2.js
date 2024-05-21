@@ -1,8 +1,6 @@
-//screens/Screen2.js
-
 import React, { useRef, useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Animated, Dimensions, PanResponder } from 'react-native';
-import { Camera } from 'expo-camera';
+import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import BackGround from '../components/Bred.js';
 
@@ -12,8 +10,9 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
   const initialHeight = height * 0.75;
   const expandedHeight = height * 0.95;
   const animatedValue = useRef(new Animated.Value(initialHeight)).current;
-  const [isCameraReady, setIsCameraReady] = useState(false);
-  const [hasPermission, setHasPermission] = useState(null);
+  const [facing, setFacing] = useState('back');
+  const [permission, requestPermission] = useCameraPermissions();
+  const [showCamera, setShowCamera] = useState(false); // State to manage camera visibility
   const cameraRef = useRef(null);
 
   const panResponder = useRef(
@@ -40,44 +39,30 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
     })
   ).current;
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-      setIsCameraReady(status === 'granted');
-      if (status !== 'granted') {
-        alert('Permission to access camera is required!');
-      }
-    })();
-  }, []);  
-
   const handleCapture = async () => {
-    if (!hasPermission || !isCameraReady) {
-      alert('Camera permission not granted or camera not ready!');
-      return;
-    }
-    if (cameraRef.current) {
-      let photo = await cameraRef.current.takePictureAsync();
-      console.log('Photo captured:', photo);
-    }
+    setShowCamera(true); // Display camera when "Capture" button is pressed
   };
 
   const handleGalleryOpen = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== 'granted') {
-      alert('Permission to access gallery is required!');
-      return;
-    }
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.cancelled) {
-      console.log('Image selected:', result.uri);
-      // Process the selected image URI as needed
+    try {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status === 'granted') {
+        const result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+        
+        if (!result.cancelled) {
+          console.log('Image selected:', result.uri);
+          // Handle the selected image URI as needed
+        }
+      } else {
+        alert('Permission to access gallery is required!');
+      }
+    } catch (error) {
+      console.error('Error opening gallery:', error);
     }
   };
 
@@ -113,12 +98,13 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
           </TouchableOpacity>
         </View>
       </Animated.View>
-      {isCameraReady && hasPermission && (
-        <Camera
+      {/* Conditionally render CameraView based on showCamera state */}
+      {showCamera && permission && permission.granted && (
+        <CameraView
           ref={cameraRef}
           style={styles.camera}
-          type={Camera.Constants.Type.back}
-          autoFocus={Camera.Constants.AutoFocus.on}
+          facing={facing}
+          autoFocus="on"
         />
       )}
     </BackGround>
