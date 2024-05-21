@@ -4,7 +4,11 @@ import Background from '../components/Bred';
 
 const { height } = Dimensions.get('window');
 
-const LoginScreen = ({ onLogin, navigateToScreen }) => {
+const LoginScreen = ({ onLogin, navigateToScreen, continueAsGuest }) => {
+  const handleLogin = () => {
+    onLogin();
+  };
+
   return (
     <Background>
       <View style={styles.bottomform}>
@@ -16,7 +20,7 @@ const LoginScreen = ({ onLogin, navigateToScreen }) => {
           <Image source={require('../assets/facebook_logo.png')} style={styles.buttonLogo} />
           <Text style={[styles.buttonText, styles.whiteText]}>Continue with Facebook</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.guestButton]} onPress={onLogin}>
+        <TouchableOpacity style={[styles.button, styles.guestButton]} onPress={continueAsGuest}>
           <Image source={require('../assets/guest_logo.png')} style={styles.buttonLogo} />
           <Text style={[styles.buttonText, styles.whiteText]}>Continue as Guest</Text>
         </TouchableOpacity>
@@ -29,8 +33,6 @@ const LoginScreen = ({ onLogin, navigateToScreen }) => {
     </Background>
   );
 };
-
-export default LoginScreen;
 
 const styles = StyleSheet.create({
   bottomform: {
@@ -107,3 +109,5 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 });
+
+export default LoginScreen;

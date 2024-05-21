@@ -21,6 +21,11 @@ export default function App() {
     setCurrentScreen('Home');
   };
 
+  const continueAsGuest = () => {
+    setLoggedIn(true);
+    setCurrentScreen('Screen2');
+  };
+
   const navigateToScreen = (screen) => {
     setCurrentScreen(screen);
   };
@@ -29,7 +34,7 @@ export default function App() {
     <View style={styles.container}>
       {!loggedIn ? (
         <>
-          {currentScreen === 'Login' && <LoginScreen onLogin={handleLogin} navigateToScreen={navigateToScreen} />}
+          {currentScreen === 'Login' && <LoginScreen onLogin={handleLogin} navigateToScreen={navigateToScreen} continueAsGuest={continueAsGuest} />}
           {currentScreen === 'Email' && <Email onLogin={handleLogin} />}
         </>
       ) : (
