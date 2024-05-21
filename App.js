@@ -1,4 +1,4 @@
-//App.js
+// App.js
 
 import React, { useState } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
@@ -36,11 +36,12 @@ export default function App() {
         <>
           {currentScreen === 'Home' && <HomeScreen navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Screen1' && <Screen1 />}
-          {currentScreen === 'Screen2' && <Screen2 />}
+          {currentScreen === 'Screen2' && <Screen2 hideNavbar={true} />}
           {currentScreen === 'Screen3' && <Screen3 />}
           {currentScreen === 'Screen4' && <Screen4 />}
           {currentScreen === 'Profile' && <ProfileScreen />}
-          <BottomNavbar navigateToScreen={navigateToScreen} />
+          {/* Conditionally render the BottomNavbar based on current screen */}
+          {currentScreen !== 'Screen2' && <BottomNavbar navigateToScreen={navigateToScreen} />}
         </>
       )}
       <StatusBar style="auto" />
