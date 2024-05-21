@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import BackGround from '../components/Bred.js'
 
 const Screen2 = ({ navigateToScreen, isGuest }) => { // Receive isGuest prop
   const goToHome = () => {
@@ -7,6 +8,7 @@ const Screen2 = ({ navigateToScreen, isGuest }) => { // Receive isGuest prop
   };
 
   return (
+    <BackGround>
     <View style={styles.container}>
       <Text>Hi, I'm Screen 2</Text>
       {!isGuest && ( // Only show button if not a guest
@@ -15,6 +17,7 @@ const Screen2 = ({ navigateToScreen, isGuest }) => { // Receive isGuest prop
         </TouchableOpacity>
       )}
     </View>
+    </BackGround>
   );
 };
 
