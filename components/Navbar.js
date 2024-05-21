@@ -1,3 +1,5 @@
+// components/Navbar.js
+
 import React from 'react';
 import { View, TouchableOpacity, Button, Dimensions, StyleSheet } from 'react-native';
 
@@ -5,7 +7,7 @@ const BottomNavbar = ({ navigateToScreen }) => {
   const screenWidth = Dimensions.get('window').width;
 
   return (
-    <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 10, borderTopWidth: 1, borderTopColor: 'gray' }}>
+    <View style={[styles.bottomNavbar, { width: screenWidth }]}>
       <View style={{ flex: 1, maxWidth: screenWidth / 5 }}>
         <Button title="Home" onPress={() => navigateToScreen('Home')} />
       </View>
@@ -31,6 +33,17 @@ const BottomNavbar = ({ navigateToScreen }) => {
 };
 
 const styles = StyleSheet.create({
+  bottomNavbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderTopWidth: 1,
+    borderTopColor: 'gray',
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: '#fff', // Add background color to navbar
+  },
   circularContainer: {
     alignItems: 'center',
     justifyContent: 'center',

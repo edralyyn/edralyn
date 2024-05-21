@@ -1,14 +1,12 @@
-// screens/Home.js
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const HomeScreen = ({ navigateToScreen }) => {
+const Email = ({ onLogin }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Home Screen</Text>
-      {/* You can add your home screen components here */}
-      <TouchableOpacity style={styles.button} onPress={() => navigateToScreen('Profile')}>
-        <Text style={styles.buttonText}>Go to Profile</Text>
+      <Text style={styles.text}>Email page</Text>
+      <TouchableOpacity style={styles.button} onPress={onLogin}>
+        <Text style={styles.buttonText}>Continue with email</Text>
       </TouchableOpacity>
     </View>
   );
@@ -26,7 +24,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 15,
-    backgroundColor: '#007BFF',
+    backgroundColor: '#9D1111',
     borderRadius: 10,
   },
   buttonText: {
@@ -35,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default Email;

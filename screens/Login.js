@@ -1,46 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
 import Background from '../components/Bred';
 
-const { height } = Dimensions.get('window'); // Get the height of the screen
+const { height } = Dimensions.get('window');
 
-const LoginScreen = ({ onLogin }) => {
+const LoginScreen = ({ onLogin, navigateToScreen }) => {
   return (
     <Background>
-    <View style={styles.bottomform}>
-      <TouchableOpacity style={[styles.button, styles.googleButton]} onPress={onLogin}>
-              <Image
-                source={require('../assets/google_logo.png')}
-                style={styles.buttonLogo}
-              />
-              <Text style={[styles.buttonText, styles.grayText]}>Continue with Google</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.facebookButton]} onPress={onLogin}>
-              <Image
-                source={require('../assets/facebook_logo.png')}
-                style={styles.buttonLogo}
-              />
-              <Text style={[styles.buttonText, styles.whiteText]}>Continue with Facebook</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.guestButton]} onPress={onLogin}>
-              <Image
-                source={require('../assets/guest_logo.png')}
-                style={styles.buttonLogo}
-              />
-              <Text style={[styles.buttonText, styles.whiteText]}>Continue as Guest</Text>
-            </TouchableOpacity>
-            <Text style={[styles.orText, styles.grayText]}> ⎯⎯⎯⎯⎯⎯  or Login with ⎯⎯⎯⎯⎯⎯ </Text>
-            <TouchableOpacity style={[styles.button, styles.emailButton]} onPress={onLogin}>
-              <Image
-                source={require('../assets/email_logo.png')}
-                style={styles.buttonLogo}
-              />
-              <Text style={[styles.buttonText, styles.emailButtonText]}>Continue with email</Text>
-            </TouchableOpacity>
-    </View>
+      <View style={styles.bottomform}>
+        <TouchableOpacity style={[styles.button, styles.googleButton]} onPress={onLogin}>
+          <Image source={require('../assets/google_logo.png')} style={styles.buttonLogo} />
+          <Text style={[styles.buttonText, styles.grayText]}>Continue with Google</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.facebookButton]} onPress={onLogin}>
+          <Image source={require('../assets/facebook_logo.png')} style={styles.buttonLogo} />
+          <Text style={[styles.buttonText, styles.whiteText]}>Continue with Facebook</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.guestButton]} onPress={onLogin}>
+          <Image source={require('../assets/guest_logo.png')} style={styles.buttonLogo} />
+          <Text style={[styles.buttonText, styles.whiteText]}>Continue as Guest</Text>
+        </TouchableOpacity>
+        <Text style={[styles.orText, styles.grayText]}> ⎯⎯⎯⎯⎯⎯  or Login with ⎯⎯⎯⎯⎯⎯ </Text>
+        <TouchableOpacity style={[styles.button, styles.emailButton]} onPress={() => navigateToScreen('Email')}>
+          <Image source={require('../assets/email_logo.png')} style={styles.buttonLogo} />
+          <Text style={[styles.buttonText, styles.emailButtonText]}>Continue with email</Text>
+        </TouchableOpacity>
+      </View>
     </Background>
   );
-}
+};
 
 export default LoginScreen;
 
@@ -71,8 +59,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '90%',
     flexDirection: 'row',
-    elevation: 3, // for Android shadow
-    shadowColor: '#000', // for iOS shadow
+    elevation: 3,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
