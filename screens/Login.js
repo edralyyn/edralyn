@@ -1,4 +1,4 @@
-//screens/Login.js
+// screens/Login.js
 
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
@@ -41,13 +41,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    height: '50%',
+    minHeight: Dimensions.get('window').height * 0.6, // Minimum height is 60% of the screen height
+    maxHeight: Dimensions.get('window').height * 0.6, // Maximum height is also 60% of the screen height
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-  },
+    paddingVertical: 20, // Add padding to prevent content compression
+  },  
   logo: {
     width: 150,
     height: 150,
