@@ -39,6 +39,10 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
     })
   ).current;
 
+  const toggleCameraFacing = () => {
+    setFacing(current => (current === 'back' ? 'front' : 'back'));
+  };
+
   const handleCapture = async () => {
     setShowCamera(true); // Display camera when "Capture" button is pressed
   };
@@ -107,6 +111,11 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
           autoFocus="on"
         />
       )}
+      <View style={styles.toggleButtonContainer}>
+        <TouchableOpacity style={styles.toggleButton} onPress={toggleCameraFacing}>
+          <Text style={styles.toggleButtonText}>Flip Camera</Text>
+        </TouchableOpacity>
+      </View>
     </BackGround>
   );
 };
@@ -153,6 +162,20 @@ const styles = StyleSheet.create({
     left: 0,
     width: '100%',
     height: '100%',
+  },
+  toggleButtonContainer: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+  },
+  toggleButton: {
+    padding: 10,
+    backgroundColor: 'blue',
+    borderRadius: 5,
+  },
+  toggleButtonText: {
+    color: 'white',
+    fontSize: 16,
   },
 });
 
