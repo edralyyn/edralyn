@@ -60,6 +60,15 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
       </View>
         <View style={styles.content}>
           <Text>This is the persistent off-canvas bottom sheet.</Text>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>capture</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>upload</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Submit</Text>
+          </TouchableOpacity>
         </View>
       </Animated.View>
     </BackGround>
