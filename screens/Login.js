@@ -1,3 +1,5 @@
+//screens/Login.js
+
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
 import Background from '../components/Bred';

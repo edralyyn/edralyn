@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Screen2 = ({ navigateToScreen }) => {
+const Screen2 = ({ navigateToScreen, isGuest }) => { // Receive isGuest prop
   const goToHome = () => {
     navigateToScreen('Home');
   };
@@ -9,9 +9,11 @@ const Screen2 = ({ navigateToScreen }) => {
   return (
     <View style={styles.container}>
       <Text>Hi, I'm Screen 2</Text>
-      <TouchableOpacity onPress={goToHome} style={styles.button}>
-        <Text style={styles.buttonText}>Go to Home</Text>
-      </TouchableOpacity>
+      {!isGuest && ( // Only show button if not a guest
+        <TouchableOpacity onPress={goToHome} style={styles.button}>
+          <Text style={styles.buttonText}>Go to Home</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

@@ -15,14 +15,17 @@ import ProfileScreen from './screens/Profile';
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentScreen, setCurrentScreen] = useState('Login');
+  const [isGuest, setIsGuest] = useState(false);
 
   const handleLogin = () => {
     setLoggedIn(true);
+    setIsGuest(false);
     setCurrentScreen('Home');
   };
 
   const continueAsGuest = () => {
     setLoggedIn(true);
+    setIsGuest(true);
     setCurrentScreen('Screen2');
   };
 
@@ -41,11 +44,10 @@ export default function App() {
         <>
           {currentScreen === 'Home' && <HomeScreen navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Screen1' && <Screen1 />}
-          {currentScreen === 'Screen2' && <Screen2 hideNavbar={true}  navigateToScreen={navigateToScreen}/>}
+          {currentScreen === 'Screen2' && <Screen2 hideNavbar={true} isGuest={isGuest} navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Screen3' && <Screen3 />}
           {currentScreen === 'Screen4' && <Screen4 />}
           {currentScreen === 'Profile' && <ProfileScreen />}
-          {/* Conditionally render the BottomNavbar based on current screen */}
           {currentScreen !== 'Screen2' && <BottomNavbar navigateToScreen={navigateToScreen} />}
         </>
       )}
