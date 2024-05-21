@@ -36,7 +36,7 @@ export default function App() {
         <>
           {currentScreen === 'Home' && <HomeScreen navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Screen1' && <Screen1 />}
-          {currentScreen === 'Screen2' && <Screen2 hideNavbar={true} />}
+          {currentScreen === 'Screen2' && <Screen2 hideNavbar={true}  navigateToScreen={navigateToScreen}/>}
           {currentScreen === 'Screen3' && <Screen3 />}
           {currentScreen === 'Screen4' && <Screen4 />}
           {currentScreen === 'Profile' && <ProfileScreen />}
