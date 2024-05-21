@@ -1,3 +1,5 @@
+//App.js
+
 import React, { useState } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import LoginScreen from './screens/Login';
