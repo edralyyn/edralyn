@@ -1,3 +1,5 @@
+//App.js
+
 import React, { useState, useEffect } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import * as Permissions from 'expo-permissions';
@@ -31,17 +33,6 @@ export default function App() {
   const navigateToScreen = (screen) => {
     setCurrentScreen(screen);
   };
-
-  useEffect(() => {
-    async function requestCameraPermission() {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA);
-      if (status !== 'granted') {
-        alert('Permission to access camera is required!');
-      }
-    }
-
-    requestCameraPermission();
-  }, []);
 
   return (
     <View style={styles.container}>

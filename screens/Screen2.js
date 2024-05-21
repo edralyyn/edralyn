@@ -1,3 +1,5 @@
+//screens/Screen2.js
+
 import React, { useRef, useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Animated, Dimensions, PanResponder } from 'react-native';
 import { Camera } from 'expo-camera';
@@ -47,7 +49,7 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         alert('Permission to access camera is required!');
       }
     })();
-  }, []);
+  }, []);  
 
   const handleCapture = async () => {
     if (!hasPermission || !isCameraReady) {
