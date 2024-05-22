@@ -60,9 +60,11 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
   
     if (!result.cancelled) {
       if (result.type === 'image') {
+        console.log('Picture'); // Log when a picture is taken
         console.log('Image URI: ', result.uri);
         // Handle the captured image URI as needed
       } else if (result.type === 'video') {
+        console.log('Video'); // Log when a video is taken
         console.log('Video URI: ', result.uri);
         // Handle the captured video URI as needed
       }
@@ -76,15 +78,26 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
       return;
     }
   
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
-      allowsMultipleSelection: true, // Enable multiple selection
-    });
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1,
+        allowsMultipleSelection: true, // Enable multiple selection
+      });
   
-    if (!result.cancelled) {
-      console.log('Images selected: ', result.uris);
-      // Handle the selected image URIs as needed
+      if (!result.cancelled) {
+        if (result?.uris && result.uris.length > 0) {
+          if (result.uris.length === 1) {
+            console.log('Photo upload'); // Log when a single photo is uploaded
+          } else {
+            console.log(`Uploaded ${result.uris.length} photos`); // Log when multiple photos are uploaded
+          }
+          console.log('Images selected: ', result.uris);
+          // Handle the selected image URIs as needed
+        }
+      }
+    } catch (error) {
+      console.error('Error selecting images:', error); // Log the error if there's an issue with selecting images
     }
   };  
 
