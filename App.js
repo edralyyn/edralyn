@@ -1,8 +1,5 @@
-//App.js
-
 import React, { useState, useEffect } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
-import * as Permissions from 'expo-permissions';
 import LoginScreen from './screens/Login';
 import HomeScreen from './screens/Home';
 import Screen1 from './screens/Screen1';

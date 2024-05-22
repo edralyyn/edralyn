@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Animated, Dimensions, PanResponder } from 'react-native';
-import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import BackGround from '../components/Bred.js';
 
@@ -10,9 +9,7 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
   const initialHeight = height * 0.75;
   const expandedHeight = height * 0.95;
   const animatedValue = useRef(new Animated.Value(initialHeight)).current;
-  const [facing, setFacing] = useState('back');
-  const [permission, requestPermission] = useCameraPermissions();
-  const [showCamera, setShowCamera] = useState(false); // State to manage camera visibility
+  const [showCamera, setShowCamera] = useState(false);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -38,64 +35,51 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
     })
   ).current;
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await requestPermission();
-      if (status !== 'granted') {
-        alert('Permission to access camera is required!');
-      }
-    })();
-  }, []);
-
-  const toggleCameraFacing = () => {
-    setFacing(current => (current === 'back' ? 'front' : 'back'));
+  const requestCameraPermissions = async () => {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== 'granted') {
+      alert('Permission to access camera is required!');
+    }
   };
 
   const handleCapture = async () => {
-    setShowCamera(true); // Display camera when "Capture" button is pressed
+    await requestCameraPermissions();
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      console.log('Image URI: ', result.uri);
+      // Handle the captured image URI as needed
+    }
   };
 
   const handleGalleryOpen = async () => {
-    try {
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (status === 'granted') {
-        const result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.Images,
-          allowsEditing: true,
-          aspect: [4, 3],
-          quality: 1,
-        });
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      alert('Permission to access gallery is required!');
+      return;
+    }
 
-        if (!result.cancelled) {
-          console.log('Image selected:', result.uri);
-          // Handle the selected image URI as needed
-        }
-      } else {
-        alert('Permission to access gallery is required!');
-      }
-    } catch (error) {
-      console.error('Error opening gallery:', error);
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      console.log('Image selected: ', result.uri);
+      // Handle the selected image URI as needed
     }
   };
 
   const goToHome = () => {
     navigateToScreen('Home');
   };
-
-  if (!permission) {
-    // Camera permissions are still loading.
-    return <View />;
-  }
-
-  if (!permission.granted) {
-    // Camera permissions are not granted yet.
-    return (
-      <View style={styles.container}>
-        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
-        <Button onPress={requestPermission} title="grant permission" />
-      </View>
-    );
-  }
 
   return (
     <BackGround>
@@ -125,22 +109,6 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
           </TouchableOpacity>
         </View>
       </Animated.View>
-      {/* Conditionally render CameraView based on showCamera state */}
-      {showCamera && (
-        <CameraView style={styles.camera} facing={facing}>
-          <View style={styles.cameraControls}>
-            <TouchableOpacity style={styles.button} onPress={handleCapture}>
-              <Text style={styles.buttonText}>Snap</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-              <Text style={styles.buttonText}>Flip</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => setShowCamera(false)}>
-              <Text style={styles.buttonText}>Close</Text>
-            </TouchableOpacity>
-          </View>
-        </CameraView>
-      )}
     </BackGround>
   );
 };
@@ -178,21 +146,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  camera: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-  },
-  cameraControls: {
-    position: 'absolute',
-    bottom: 20,
-    left: 0,
-    right: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
