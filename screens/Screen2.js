@@ -49,18 +49,30 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
       alert('Permission to access camera is required!');
       return;
     }
-
+  
     const result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
       quality: 1,
+      allowsEditing: true,
+      aspect: [4, 3], // Aspect ratio for photos
+      videoMaxDuration: 30, // Maximum video duration (in seconds)
+      videoQuality: 0, // Use 0 for high quality, 1 for medium, and 2 for low
+      // Specify whether to start the camera in video mode
+      // true for video mode, false for photo mode
+      video: true, // Change to false if you want to start in photo mode
     });
-
+  
     if (!result.cancelled) {
-      console.log('Image URI: ', result.uri);
-      // Handle the captured image URI as needed
+      if (result.type === 'image') {
+        console.log('Image URI: ', result.uri);
+        // Handle the captured image URI as needed
+      } else if (result.type === 'video') {
+        console.log('Video URI: ', result.uri);
+        // Handle the captured video URI as needed
+      }
     }
   };
-
+  
   const handleGalleryOpen = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== 'granted') {
