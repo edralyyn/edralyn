@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Animated, Dimensions, PanResponder, Alert } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Animated, Dimensions, PanResponder, Modal, TouchableWithoutFeedback } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import BackGround from '../components/Bred.js';
 
@@ -9,6 +9,7 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
   const initialHeight = height * 0.8;
   const expandedHeight = height * 0.95;
   const animatedValue = useRef(new Animated.Value(initialHeight)).current;
+  const [showModal, setShowModal] = useState(false);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -105,6 +106,14 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
     navigateToScreen('Home');
   };
 
+  const submitReport = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <BackGround>
       <Animated.View
@@ -128,11 +137,29 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
           <TouchableOpacity style={styles.button} onPress={handleGalleryOpen}>
             <Text style={styles.buttonText}>Upload</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={submitReport}>
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
         </View>
       </Animated.View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showModal}
+        onRequestClose={closeModal}
+      >
+        <View style={styles.modalContainer}>
+          <TouchableWithoutFeedback onPress={closeModal}>
+            <View style={styles.modalOverlay} />
+          </TouchableWithoutFeedback>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Report submitted!</Text>
+            <TouchableOpacity style={styles.modalButton} onPress={closeModal}>
+              <Text style={styles.modalButtonText}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </BackGround>
   );
 };
@@ -172,6 +199,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+    elevation: 5,
   },
 });
 
