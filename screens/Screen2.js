@@ -53,13 +53,9 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
     const result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       quality: 1,
-      allowsEditing: true,
-      aspect: [4, 3], // Aspect ratio for photos
-      videoMaxDuration: 30, // Maximum video duration (in seconds)
-      videoQuality: 0, // Use 0 for high quality, 1 for medium, and 2 for low
-      // Specify whether to start the camera in video mode
-      // true for video mode, false for photo mode
-      video: true, // Change to false if you want to start in photo mode
+      videoMaxDuration: 30,
+      videoQuality: 0,
+      video: true,
     });
   
     if (!result.cancelled) {
