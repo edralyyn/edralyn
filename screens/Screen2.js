@@ -6,7 +6,7 @@ import BackGround from '../components/Bred.js';
 const { height } = Dimensions.get('window');
 
 const Screen2 = ({ navigateToScreen, isGuest }) => {
-  const initialHeight = height * 0.75;
+  const initialHeight = height * 0.8;
   const expandedHeight = height * 0.95;
   const animatedValue = useRef(new Animated.Value(initialHeight)).current;
 
