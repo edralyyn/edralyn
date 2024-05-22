@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Animated, Dimensions, PanResponder } from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
+import { Text, View, TouchableOpacity, StyleSheet, Animated, Dimensions, PanResponder, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import BackGround from '../components/Bred.js';
 
@@ -9,7 +9,6 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
   const initialHeight = height * 0.75;
   const expandedHeight = height * 0.95;
   const animatedValue = useRef(new Animated.Value(initialHeight)).current;
-  const [showCamera, setShowCamera] = useState(false);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -35,19 +34,24 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
     })
   ).current;
 
-  const requestCameraPermissions = async () => {
+  useEffect(() => {
+    (async () => {
+      const { status } = await ImagePicker.requestCameraPermissionsAsync();
+      if (status !== 'granted') {
+        alert('Permission to access camera is required!');
+      }
+    })();
+  }, []);
+
+  const handleCapture = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== 'granted') {
       alert('Permission to access camera is required!');
+      return;
     }
-  };
 
-  const handleCapture = async () => {
-    await requestCameraPermissions();
     const result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
       quality: 1,
     });
 
@@ -63,19 +67,18 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
       alert('Permission to access gallery is required!');
       return;
     }
-
+  
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
       quality: 1,
+      allowsMultipleSelection: true, // Enable multiple selection
     });
-
+  
     if (!result.cancelled) {
-      console.log('Image selected: ', result.uri);
-      // Handle the selected image URI as needed
+      console.log('Images selected: ', result.uris);
+      // Handle the selected image URIs as needed
     }
-  };
+  };  
 
   const goToHome = () => {
     navigateToScreen('Home');
