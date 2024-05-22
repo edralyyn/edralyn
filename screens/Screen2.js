@@ -13,7 +13,6 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
   const [facing, setFacing] = useState('back');
   const [permission, requestPermission] = useCameraPermissions();
   const [showCamera, setShowCamera] = useState(false); // State to manage camera visibility
-  const cameraRef = useRef(null);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -39,6 +38,15 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
     })
   ).current;
 
+  useEffect(() => {
+    (async () => {
+      const { status } = await requestPermission();
+      if (status !== 'granted') {
+        alert('Permission to access camera is required!');
+      }
+    })();
+  }, []);
+
   const toggleCameraFacing = () => {
     setFacing(current => (current === 'back' ? 'front' : 'back'));
   };
@@ -57,7 +65,7 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
           aspect: [4, 3],
           quality: 1,
         });
-        
+
         if (!result.cancelled) {
           console.log('Image selected:', result.uri);
           // Handle the selected image URI as needed
@@ -73,6 +81,21 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
   const goToHome = () => {
     navigateToScreen('Home');
   };
+
+  if (!permission) {
+    // Camera permissions are still loading.
+    return <View />;
+  }
+
+  if (!permission.granted) {
+    // Camera permissions are not granted yet.
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
+  }
 
   return (
     <BackGround>
@@ -103,19 +126,21 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         </View>
       </Animated.View>
       {/* Conditionally render CameraView based on showCamera state */}
-      {showCamera && permission && permission.granted && (
-        <CameraView
-          ref={cameraRef}
-          style={styles.camera}
-          facing={facing}
-          autoFocus="on"
-        />
+      {showCamera && (
+        <CameraView style={styles.camera} facing={facing}>
+          <View style={styles.cameraControls}>
+            <TouchableOpacity style={styles.button} onPress={handleCapture}>
+              <Text style={styles.buttonText}>Snap</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+              <Text style={styles.buttonText}>Flip</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => setShowCamera(false)}>
+              <Text style={styles.buttonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </CameraView>
       )}
-      <View style={styles.toggleButtonContainer}>
-        <TouchableOpacity style={styles.toggleButton} onPress={toggleCameraFacing}>
-          <Text style={styles.toggleButtonText}>Flip Camera</Text>
-        </TouchableOpacity>
-      </View>
     </BackGround>
   );
 };
@@ -163,19 +188,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  toggleButtonContainer: {
+  cameraControls: {
     position: 'absolute',
-    top: 20,
-    right: 20,
-  },
-  toggleButton: {
-    padding: 10,
-    backgroundColor: 'blue',
-    borderRadius: 5,
-  },
-  toggleButtonText: {
-    color: 'white',
-    fontSize: 16,
+    bottom: 20,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
