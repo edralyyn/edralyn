@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Modal, Text, TouchableOpacity, View, TouchableWithoutFeedback, Animated } from 'react-native';
-import screenStyles from './styles/screenStyles';
+import { Modal, Text, TouchableOpacity, View, TouchableWithoutFeedback } from 'react-native';
+import screenStyles from '../components/styles/screenStyles';
 
 const SubmitReport = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -14,12 +14,10 @@ const SubmitReport = () => {
   };
 
   return (
-    <View style={screenStyles.container}>
-      <Animated.View style={screenStyles.animatedContainer}>
-        <TouchableOpacity style={screenStyles.button} onPress={submitReport}>
-          <Text style={screenStyles.buttonText}>Submit</Text>
-        </TouchableOpacity>
-      </Animated.View>
+    <View>
+      <TouchableOpacity style={screenStyles.button} onPress={submitReport}>
+        <Text style={screenStyles.buttonText}>Submit</Text>
+      </TouchableOpacity>
       <Modal
         animationType="slide"
         transparent={true}
