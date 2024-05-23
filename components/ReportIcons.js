@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native';
 
 const iconsData = [
   { id: 1, name: 'Fire', image: require('../assets/fire.png') },
@@ -10,48 +10,62 @@ const iconsData = [
   { id: 6, name: 'Tornado', image: require('../assets/tornado.png') },
 ];
 
+// Calculate button size based on screen width
+const { width } = Dimensions.get('window');
+const padding = 20;
+const margin = 10;
+const buttonSize = (width - padding * 2 - 40) / 4;
+
 const ReportIcons = () => {
   return (
-    <View style={styles.container}>
-      {iconsData.map((icon) => (
-        <View key={icon.id} style={styles.iconContainer}>
-          <TouchableOpacity style={styles.button}>
-            <Image source={icon.image} style={styles.icon} />
-          </TouchableOpacity>
-          <Text style={styles.text}>{icon.name}</Text>
-        </View>
-      ))}
+    <View style={styles.outerContainer}>
+      <View style={styles.container}>
+        {iconsData.map((icon) => (
+          <View key={icon.id} style={styles.iconContainer}>
+            <TouchableOpacity style={[styles.button, { width: buttonSize, height: buttonSize }]}>
+              <Image source={icon.image} style={styles.icon} />
+            </TouchableOpacity>
+            <Text style={styles.text}>{icon.name}</Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10, // Reduce vertical padding
+  },
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-    marginTop: 50,
+    width: '100%',
   },
   iconContainer: {
     alignItems: 'center',
-    margin: 10,
+    margin: margin, // Adjust margin between icons
   },
   button: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
     backgroundColor: '#FAE1E1',
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: buttonSize / 2, // Ensure button is circular
+    padding: 10, // Add padding to the button
   },
   icon: {
-    width: 50,
-    height: 50,
+    width: buttonSize / 2,
+    height: buttonSize / 2,
+    resizeMode: 'contain',
   },
   text: {
     marginTop: 5,
-    fontSize: 16,
+    fontSize: 12,
     color: '#636363',
+    textAlign: 'center',
   },
 });
 
