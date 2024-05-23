@@ -1,6 +1,7 @@
 // screens/Home.js
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import ReportIcons from '../components/ReportIcons';
 
 const HomeScreen = ({ navigateToScreen }) => {
   return (
@@ -10,6 +11,7 @@ const HomeScreen = ({ navigateToScreen }) => {
       <TouchableOpacity style={styles.button} onPress={() => navigateToScreen('Profile')}>
         <Text style={styles.buttonText}>Go to Profile</Text>
       </TouchableOpacity>
+      <ReportIcons/>
     </View>
   );
 };
