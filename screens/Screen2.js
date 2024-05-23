@@ -61,7 +61,7 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         <View style={screenStyles.container}>
           <Text>Hi, I'm Screen 2</Text>
           {!isGuest && (
-            <TouchableOpacity onPress={goToHome} style={screenStyles.button}>
+            <TouchableOpacity onPress={goToHome} style={screenStyles.defaultButton}>
               <Text style={screenStyles.buttonText}>Go to Home</Text>
             </TouchableOpacity>
           )}

@@ -1,20 +1,28 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
-export default StyleSheet.create({
+const { height } = Dimensions.get('window');
+
+const screenStyles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
     },
-    button: {
-      marginTop: 20,
-      padding: 10,
-      backgroundColor: 'blue',
-      borderRadius: 5,
-    },
     buttonText: {
       color: 'white',
       fontSize: 16,
+    },
+    defaultButton: {
+      color: 'white',
+      fontSize: 16,
+      padding: 15,
+      borderRadius: 10,
+      marginVertical: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '90%',
+      flexDirection: 'row',
+      color: '#800000',
     },
     bottomSheet: {
       position: 'absolute',
@@ -56,4 +64,68 @@ export default StyleSheet.create({
       alignItems: 'center',
       elevation: 5,
     },
+    bottomform: {
+      position: 'absolute',
+      bottom: 0,
+      width: '100%',
+      minHeight: height * 0.6,
+      maxHeight: height * 0.6,
+      backgroundColor: 'white',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderTopLeftRadius: 30,
+      borderTopRightRadius: 30,
+      paddingVertical: 20,
+    },
+    button: {
+      padding: 15,
+      borderRadius: 10,
+      marginVertical: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '90%',
+      flexDirection: 'row',
+    },
+    buttonLogo: {
+      width: 24,
+      height: 24,
+      marginRight: 10,
+    },
+    buttonText: {
+      fontSize: 16,
+      color: '#333',
+    },
+    whiteText: {
+      color: '#FFF',
+    },
+    grayText: {
+      color: '#858484',
+    },
+    emailButtonText: {
+      fontSize: 16,
+      color: '#9D1111',
+    },
+    orText: {
+      fontSize: 16,
+      color: '#333',
+      marginVertical: 10,
+    },
+    googleButton: {
+      backgroundColor: '#FFF',
+      borderColor: '#858484',
+      borderWidth: 1,
+    },
+    facebookButton: {
+      backgroundColor: '#1877F2',
+    },
+    guestButton: {
+      backgroundColor: '#969696',
+    },
+    emailButton: {
+      backgroundColor: '#FFF',
+      borderColor: '#9D1111',
+      borderWidth: 1,
+    },
   });
+
+  export default screenStyles;
