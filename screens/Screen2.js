@@ -78,11 +78,6 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         </View>
         <View style={screenStyles.container}>
           <Text>Type of Disaster:</Text>
-          {!isGuest && (
-            <TouchableOpacity onPress={closeBottomSheet} style={screenStyles.button}>
-              <Text style={screenStyles.whiteText}>Go to Home</Text>
-            </TouchableOpacity>
-          )}
         </View>
         <View style={screenStyles.container}>
           <Text>This is the persistent off-canvas bottom sheet.</Text>
