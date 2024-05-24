@@ -19,7 +19,6 @@ const buttonSize = (width - padding * 2 - margin * (columns * 2)) / columns;
 
 const ReportIcons = () => {
   return (
-    <View style={styles.outerContainer}>
       <View style={styles.container}>
         {iconsData.map((icon) => (
           <View key={icon.id} style={styles.iconContainer}>
@@ -30,16 +29,10 @@ const ReportIcons = () => {
           </View>
         ))}
       </View>
-    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  outerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: padding,
-  },
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',

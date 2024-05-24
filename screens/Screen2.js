@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Text, View, Animated, Image, Dimensions, PanResponder, TouchableOpacity } from 'react-native';
+import { Text, View, Animated, Image, Dimensions, PanResponder, TouchableOpacity, TextInput } from 'react-native';
 import Background from '../components/Bred';
 import screenStyles from '../components/styles/screenStyles';
 import SubmitReport from '../components/SubmitReport';
@@ -80,10 +80,21 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         <View style={screenStyles.container}>
           <Text>Type of Disaster:</Text>
           <ReportIcons />
+          <Text>Share Location</Text>
+          <TextInput
+            style={screenStyles.textInput}
+            placeholder="Type location"
+            multiline={true}
+          />
+          <Text>Other details:</Text>
+          <TextInput
+            style={screenStyles.textInput}
+            multiline={true}
+          />
           <View style={screenStyles.rowContainer}>
-          <CameraCapture />
-          <Text style={screenStyles.orText} >or</Text>
-          <GalleryUpload />
+            <CameraCapture />
+            <Text style={screenStyles.orText}>or</Text>
+            <GalleryUpload />
           </View>
           <SubmitReport />
         </View>

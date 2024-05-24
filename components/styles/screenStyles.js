@@ -118,6 +118,13 @@ const screenStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  textInput: {
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 16,
+    width: '80%', // Take up 80% of the screen width
+    height: 50, // Set height to 10 units
+  },
 });
 
 export default screenStyles;
