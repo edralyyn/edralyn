@@ -15,8 +15,6 @@ const CameraCapture = () => {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       quality: 1,
       videoMaxDuration: 30,
-      videoQuality: 0,
-      video: true,
     });
 
     if (!result.cancelled) {

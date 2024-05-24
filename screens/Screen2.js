@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Text, View, Animated, Dimensions, PanResponder, TouchableOpacity } from 'react-native';
-import BackGround from '../components/Bred';
+import Background from '../components/Bred';
 import screenStyles from '../components/styles/screenStyles';
 import SubmitReport from '../components/SubmitReport';
 import CameraCapture from '../components/CameraCapture';
@@ -23,17 +23,10 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         animatedValue.setValue(newHeight);
       },
       onPanResponderRelease: (evt, gestureState) => {
-        if (gestureState.dy < 0) {
-          Animated.spring(animatedValue, {
-            toValue: expandedHeight,
-            useNativeDriver: false,
-          }).start();
-        } else {
-          Animated.spring(animatedValue, {
-            toValue: initialHeight,
-            useNativeDriver: false,
-          }).start();
-        }
+        Animated.spring(animatedValue, {
+          toValue: gestureState.dy < 0 ? expandedHeight : initialHeight,
+          useNativeDriver: false,
+        }).start();
       },
     })
   ).current;
@@ -52,11 +45,8 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
   };
 
   return (
-    <BackGround>
-      <Animated.View
-        style={[screenStyles.bottomSheet, { height: animatedValue }]}
-        {...panResponder.panHandlers}
-      >
+    <Background>
+      <Animated.View style={[screenStyles.bottomSheet, { height: animatedValue }]} {...panResponder.panHandlers}>
         <View style={screenStyles.indicator} />
         <View style={screenStyles.container}>
           <Text>Type of Disaster:</Text>
@@ -73,7 +63,7 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
           <SubmitReport />
         </View>
       </Animated.View>
-    </BackGround>
+    </Background>
   );
 };
 

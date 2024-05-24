@@ -1,13 +1,9 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Background from '../components/Bred';
 import screenStyles from '../components/styles/screenStyles';
 
 const LoginScreen = ({ onLogin, navigateToScreen, continueAsGuest }) => {
-  const handleLogin = () => {
-    onLogin();
-  };
-
   const socialButtons = [
     { id: 1, label: 'Continue with Google', image: require('../assets/google_logo.png'), style: screenStyles.googleButton },
     { id: 2, label: 'Continue with Facebook', image: require('../assets/facebook_logo.png'), style: screenStyles.facebookButton },
