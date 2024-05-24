@@ -17,7 +17,6 @@ const screenStyles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     backgroundColor: 'white',
-    borderTopLeftRadius: 65,
   },
   modalContainer: {
     flex: 1,

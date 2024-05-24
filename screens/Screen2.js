@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Text, View, Animated, Image, Dimensions, PanResponder, TouchableOpacity } from 'react-native';
 import Background from '../components/Bred';
 import screenStyles from '../components/styles/screenStyles';
@@ -40,35 +40,46 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
     })();
   }, []);
 
-  const goBackToHome = () => {
-    navigateToScreen('Home');
+  const closeBottomSheet = () => {
+    Animated.timing(animatedValue, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start(() => {
+      // Navigate to the home screen after the animation completes
+      navigateToScreen('Home');
+    });
   };
 
   // Conditionally apply styles based on bottom sheet height
   const bottomSheetStyle = {
     ...screenStyles.bottomSheet,
     height: animatedValue,
-    borderTopLeftRadius: animatedValue.interpolate({
-      inputRange: [initialHeight, expandedHeight],
-      outputRange: [65, 0], // Apply borderRadius only when fully expanded
-      extrapolate: 'clamp',
-    }),
   };
+
+  // Apply borderTopLeftRadius only when the bottom sheet is not fully expanded
+  if (animatedValue._value !== expandedHeight) {
+    bottomSheetStyle.borderTopLeftRadius = animatedValue.interpolate({
+      inputRange: [0, expandedHeight],
+      outputRange: [0, 65],
+      extrapolate: 'clamp',
+    });
+  }
 
   return (
     <Background>
       <Animated.View style={[bottomSheetStyle]} {...panResponder.panHandlers}>
-      <View style={{ alignItems: 'flex-end', paddingRight: 10, paddingTop: 10 }}>
-      {!isGuest && (
-        <TouchableOpacity onPress={goBackToHome}>
-          <Image source={require('../assets/close.png')} style={{ width: 20, height: 20 }} />
-        </TouchableOpacity>
-      )}
-    </View>
+        <View style={{ alignItems: 'flex-end', paddingRight: 10, paddingTop: 10 }}>
+          {!isGuest && (
+            <TouchableOpacity onPress={closeBottomSheet}>
+              <Image source={require('../assets/close.png')} style={{ width: 20, height: 20 }} />
+            </TouchableOpacity>
+          )}
+        </View>
         <View style={screenStyles.container}>
           <Text>Type of Disaster:</Text>
           {!isGuest && (
-            <TouchableOpacity onPress={goBackToHome} style={screenStyles.button}>
+            <TouchableOpacity onPress={closeBottomSheet} style={screenStyles.button}>
               <Text style={screenStyles.whiteText}>Go to Home</Text>
             </TouchableOpacity>
           )}
