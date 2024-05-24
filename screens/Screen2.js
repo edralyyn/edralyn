@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Text, View, Animated, Dimensions, PanResponder, TouchableOpacity } from 'react-native';
+import { Text, View, Animated, Image, Dimensions, PanResponder, TouchableOpacity } from 'react-native';
 import Background from '../components/Bred';
 import screenStyles from '../components/styles/screenStyles';
 import SubmitReport from '../components/SubmitReport';
@@ -40,18 +40,24 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
     })();
   }, []);
 
-  const goToHome = () => {
+  const goBackToHome = () => {
     navigateToScreen('Home');
   };
 
   return (
     <Background>
       <Animated.View style={[screenStyles.bottomSheet, { height: animatedValue }]} {...panResponder.panHandlers}>
-        <View style={screenStyles.indicator} />
+      <View style={{ alignItems: 'flex-end', paddingRight: 10, paddingTop: 10 }}>
+      {!isGuest && (
+        <TouchableOpacity onPress={goBackToHome}>
+          <Image source={require('../assets/close.png')} style={{ width: 20, height: 20 }} />
+        </TouchableOpacity>
+      )}
+    </View>
         <View style={screenStyles.container}>
           <Text>Type of Disaster:</Text>
           {!isGuest && (
-            <TouchableOpacity onPress={goToHome} style={screenStyles.button}>
+            <TouchableOpacity onPress={goBackToHome} style={screenStyles.button}>
               <Text style={screenStyles.whiteText}>Go to Home</Text>
             </TouchableOpacity>
           )}

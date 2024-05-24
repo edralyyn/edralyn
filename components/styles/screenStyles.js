@@ -19,14 +19,6 @@ const screenStyles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopLeftRadius: 65,
   },
-  indicator: {
-    width: 40,
-    height: 5,
-    backgroundColor: '#ccc',
-    borderRadius: 3,
-    alignSelf: 'center',
-    marginVertical: 10,
-  },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
