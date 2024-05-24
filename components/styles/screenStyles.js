@@ -51,7 +51,7 @@ const screenStyles = StyleSheet.create({
     borderTopRightRadius: 30,
     paddingVertical: 20,
   },
-  button: {
+  loginbutton: {
     padding: 15,
     borderRadius: 10,
     marginVertical: 10,
@@ -59,6 +59,13 @@ const screenStyles = StyleSheet.create({
     justifyContent: 'center',
     width: '90%',
     flexDirection: 'row',
+  },
+  button: {
+    padding: 15,
+    borderRadius: 10,
+    margin: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#800000',
   },
   buttonLogo: {
