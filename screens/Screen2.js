@@ -6,6 +6,7 @@ import SubmitReport from '../components/SubmitReport';
 import CameraCapture from '../components/CameraCapture';
 import GalleryUpload from '../components/GalleryUpload';
 import * as ImagePicker from 'expo-image-picker';
+import ReportIcons from '../components/ReportIcons';
 
 const { height } = Dimensions.get('window');
 
@@ -78,9 +79,7 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         </View>
         <View style={screenStyles.container}>
           <Text>Type of Disaster:</Text>
-        </View>
-        <View style={screenStyles.container}>
-          <Text>This is the persistent off-canvas bottom sheet.</Text>
+          <ReportIcons />
           <View style={screenStyles.rowContainer}>
           <CameraCapture />
           <Text style={screenStyles.orText} >or</Text>

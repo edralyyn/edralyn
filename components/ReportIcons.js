@@ -13,8 +13,9 @@ const iconsData = [
 // Calculate button size based on screen width
 const { width } = Dimensions.get('window');
 const padding = 20;
-const margin = 10;
-const buttonSize = (width - padding * 2 - 40) / 4;
+const margin = 20;
+const columns = 4;
+const buttonSize = (width - padding * 2 - margin * (columns * 2)) / columns;
 
 const ReportIcons = () => {
   return (
@@ -37,24 +38,22 @@ const styles = StyleSheet.create({
   outerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 10, // Reduce vertical padding
+    padding: padding,
   },
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    width: '100%',
+    justifyContent: 'flex-start', // Align icons to the left side
   },
   iconContainer: {
     alignItems: 'center',
-    margin: margin, // Adjust margin between icons
+    margin: margin / 2, // Adjust margin between icons
   },
   button: {
     backgroundColor: '#FAE1E1',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: buttonSize / 2, // Ensure button is circular
-    padding: 10, // Add padding to the button
+    borderRadius: buttonSize / 2,
   },
   icon: {
     width: buttonSize / 2,
