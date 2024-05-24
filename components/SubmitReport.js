@@ -19,7 +19,7 @@ const SubmitReport = () => {
         <Text style={screenStyles.whiteText}>Submit</Text>
       </TouchableOpacity>
       <Modal
-        animationType="slide"
+        animationType="popup"
         transparent={true}
         visible={modalVisible}
         onRequestClose={closeModal}
