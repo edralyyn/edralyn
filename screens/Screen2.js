@@ -11,7 +11,7 @@ const { height } = Dimensions.get('window');
 
 const Screen2 = ({ navigateToScreen, isGuest }) => {
   const initialHeight = height * 0.8;
-  const expandedHeight = height * 0.95;
+  const expandedHeight = height;
   const animatedValue = useRef(new Animated.Value(initialHeight)).current;
 
   const panResponder = useRef(
@@ -44,9 +44,20 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
     navigateToScreen('Home');
   };
 
+  // Conditionally apply styles based on bottom sheet height
+  const bottomSheetStyle = {
+    ...screenStyles.bottomSheet,
+    height: animatedValue,
+    borderTopLeftRadius: animatedValue.interpolate({
+      inputRange: [initialHeight, expandedHeight],
+      outputRange: [65, 0], // Apply borderRadius only when fully expanded
+      extrapolate: 'clamp',
+    }),
+  };
+
   return (
     <Background>
-      <Animated.View style={[screenStyles.bottomSheet, { height: animatedValue }]} {...panResponder.panHandlers}>
+      <Animated.View style={[bottomSheetStyle]} {...panResponder.panHandlers}>
       <View style={{ alignItems: 'flex-end', paddingRight: 10, paddingTop: 10 }}>
       {!isGuest && (
         <TouchableOpacity onPress={goBackToHome}>
