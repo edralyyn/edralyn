@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import screenStyles from '../components/styles/screenStyles';
 
@@ -27,9 +27,10 @@ const CameraCapture = () => {
   };
 
   return (
-    <TouchableOpacity style={screenStyles.button} onPress={handleCapture}>
-      <Text style={screenStyles.whiteText}>Capture</Text>
-    </TouchableOpacity>
+  <TouchableOpacity onPress={handleCapture}>
+  <Image source={require('../assets/capture.png')} />
+  </TouchableOpacity>
+
   );
 };
 

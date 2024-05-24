@@ -81,8 +81,11 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         </View>
         <View style={screenStyles.container}>
           <Text>This is the persistent off-canvas bottom sheet.</Text>
+          <View style={screenStyles.rowContainer}>
           <CameraCapture />
+          <Text style={screenStyles.orText} >or</Text>
           <GalleryUpload />
+          </View>
           <SubmitReport />
         </View>
       </Animated.View>

@@ -83,7 +83,7 @@ const screenStyles = StyleSheet.create({
   orText: {
     fontSize: 16,
     color: '#333',
-    marginVertical: 10,
+    margin: 10,
   },
   googleButton: {
     backgroundColor: '#FFF',
@@ -104,6 +104,12 @@ const screenStyles = StyleSheet.create({
   modalText: {
     fontSize: 18,
     marginBottom: 20,
+  },
+  rowContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

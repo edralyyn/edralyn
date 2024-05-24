@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import screenStyles from '../components/styles/screenStyles';
 
@@ -27,8 +27,8 @@ const GalleryUpload = () => {
   };
 
   return (
-    <TouchableOpacity style={screenStyles.button} onPress={handleGalleryOpen}>
-      <Text style={screenStyles.whiteText}>Upload</Text>
+    <TouchableOpacity onPress={handleGalleryOpen}>
+    <Image source={require('../assets/upload.png')} />
     </TouchableOpacity>
   );
 };
