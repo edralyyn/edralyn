@@ -28,7 +28,7 @@ const GalleryUpload = () => {
 
   return (
     <TouchableOpacity style={screenStyles.button} onPress={handleGalleryOpen}>
-      <Text style={screenStyles.buttonText}>Upload</Text>
+      <Text style={screenStyles.whiteText}>Upload</Text>
     </TouchableOpacity>
   );
 };

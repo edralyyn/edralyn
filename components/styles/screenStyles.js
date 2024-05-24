@@ -12,18 +12,6 @@ const screenStyles = StyleSheet.create({
       color: 'white',
       fontSize: 16,
     },
-    defaultButton: {
-      color: 'white',
-      fontSize: 16,
-      padding: 15,
-      borderRadius: 10,
-      marginVertical: 10,
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '90%',
-      flexDirection: 'row',
-      color: '#800000',
-    },
     bottomSheet: {
       position: 'absolute',
       bottom: 0,
@@ -85,6 +73,7 @@ const screenStyles = StyleSheet.create({
       justifyContent: 'center',
       width: '90%',
       flexDirection: 'row',
+      backgroundColor: '#800000',
     },
     buttonLogo: {
       width: 24,
@@ -126,6 +115,7 @@ const screenStyles = StyleSheet.create({
       borderColor: '#9D1111',
       borderWidth: 1,
     },
+    
   });
 
   export default screenStyles;

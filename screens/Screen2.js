@@ -59,14 +59,14 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
       >
         <View style={screenStyles.indicator} />
         <View style={screenStyles.container}>
-          <Text>Hi, I'm Screen 2</Text>
+          <Text>Type of Disaster:</Text>
           {!isGuest && (
-            <TouchableOpacity onPress={goToHome} style={screenStyles.defaultButton}>
-              <Text style={screenStyles.buttonText}>Go to Home</Text>
+            <TouchableOpacity onPress={goToHome} style={screenStyles.button}>
+              <Text style={screenStyles.whiteText}>Go to Home</Text>
             </TouchableOpacity>
           )}
         </View>
-        <View style={screenStyles.content}>
+        <View style={screenStyles.container}>
           <Text>This is the persistent off-canvas bottom sheet.</Text>
           <CameraCapture />
           <GalleryUpload />

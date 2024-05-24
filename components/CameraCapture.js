@@ -30,7 +30,7 @@ const CameraCapture = () => {
 
   return (
     <TouchableOpacity style={screenStyles.button} onPress={handleCapture}>
-      <Text style={screenStyles.buttonText}>Capture</Text>
+      <Text style={screenStyles.whiteText}>Capture</Text>
     </TouchableOpacity>
   );
 };

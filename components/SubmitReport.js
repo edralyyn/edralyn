@@ -16,7 +16,7 @@ const SubmitReport = () => {
   return (
     <View>
       <TouchableOpacity style={screenStyles.button} onPress={submitReport}>
-        <Text style={screenStyles.buttonText}>Submit</Text>
+        <Text style={screenStyles.whiteText}>Submit</Text>
       </TouchableOpacity>
       <Modal
         animationType="slide"
@@ -31,7 +31,7 @@ const SubmitReport = () => {
           <View style={screenStyles.modalContent}>
             <Text style={screenStyles.modalText}>Report submitted!</Text>
             <TouchableOpacity style={screenStyles.button} onPress={closeModal}>
-              <Text style={screenStyles.buttonText}>OK</Text>
+              <Text style={screenStyles.whiteText}>OK</Text>
             </TouchableOpacity>
           </View>
         </View>
