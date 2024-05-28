@@ -1,10 +1,22 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const { height } = Dimensions.get('window');
+const top40Height = height * 0.4;
 
 const screenStyles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logocontainer: {
+    height: top40Height,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    position: 'absolute',
+    top: (top40Height / 2),
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -12,6 +12,9 @@ const LoginScreen = ({ onLogin, navigateToScreen, continueAsGuest }) => {
 
   return (
     <Background>
+      <View style={screenStyles.logocontainer}>
+        <Image style={screenStyles.logo} source={require('../assets/logo_1.png')}/>
+      </View>
       <View style={screenStyles.bottomform}>
         {socialButtons.map(({ id, label, image, style }) => (
           <TouchableOpacity key={id} style={[screenStyles.loginbutton, style]} onPress={id === 3 ? continueAsGuest : onLogin}>
