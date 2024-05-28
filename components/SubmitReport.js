@@ -15,7 +15,7 @@ const SubmitReport = () => {
 
   return (
     <View>
-      <TouchableOpacity style={screenStyles.button} onPress={submitReport}>
+      <TouchableOpacity style={{ ...screenStyles.button, width: '70%', alignSelf: 'center' }}  onPress={submitReport}>
         <Text style={screenStyles.whiteText}>Submit</Text>
       </TouchableOpacity>
       <Modal
