@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Text, View, TouchableOpacity, Image, TextInput, Dimensions } from 'react-native';
+import { Text, View, TextInput, Dimensions } from 'react-native';
 import Background from '../components/Bred';
 import screenStyles from '../components/styles/screenStyles';
 import SubmitReport from '../components/SubmitReport';
@@ -28,11 +28,11 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         <Text style={screenStyles.titleline1}>Report a</Text>
         <Text style={screenStyles.titleline2}>DISASTER</Text>
       </View>
-      {/* Pass initialHeight and expandedHeight props to AnimatedBottomSheet */}
-      <AnimatedBottomSheet 
-        initialHeight={height * 0.8} 
-        expandedHeight={height} 
+      <AnimatedBottomSheet
+        initialHeight={height * 0.8}
+        expandedHeight={height}
         onClose={() => navigateToScreen('Home')}
+        isGuest={isGuest} // Pass the isGuest prop
       >
         <View style={screenStyles.container}>
           <Text>Type of Disaster:</Text>

@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import { Animated, PanResponder, View , TouchableOpacity, Image, Dimensions} from 'react-native';
+import { Animated, PanResponder, View, TouchableOpacity, Image, Dimensions } from 'react-native';
 import screenStyles from './styles/screenStyles';
 
-const AnimatedBottomSheet = ({ initialHeight, expandedHeight, onClose, children }) => {
+const AnimatedBottomSheet = ({ initialHeight, expandedHeight, onClose, isGuest, children }) => {
   const animatedValue = useRef(new Animated.Value(initialHeight)).current;
   const { height: windowHeight } = Dimensions.get('window');
 
@@ -43,11 +43,13 @@ const AnimatedBottomSheet = ({ initialHeight, expandedHeight, onClose, children 
 
   return (
     <Animated.View style={[screenStyles.bottomSheet, { height: animatedValue }]} {...panResponder.panHandlers}>
-      <View style={{ alignItems: 'flex-end', paddingRight: 10, paddingTop: 10 }}>
-        <TouchableOpacity onPress={closeBottomSheet}>
-          <Image source={require('../assets/close.png')} style={{ width: 20, height: 20 }} />
-        </TouchableOpacity>
-      </View>
+      {!isGuest && (
+        <View style={{ alignItems: 'flex-end', paddingRight: 10, paddingTop: 10 }}>
+          <TouchableOpacity onPress={closeBottomSheet}>
+            <Image source={require('../assets/close.png')} style={{ width: 20, height: 20 }} />
+          </TouchableOpacity>
+        </View>
+      )}
       {children}
     </Animated.View>
   );
