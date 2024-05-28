@@ -55,6 +55,14 @@ const screenStyles = StyleSheet.create({
     fontWeight: '800',
     color: 'white',
   },
+  capture: {
+    marginHorizontal: 10,
+    flex: 1,
+  },
+  upload: {
+    marginHorizontal: 10,
+    flex: 1,
+  },
 
 
 
@@ -178,6 +186,8 @@ const screenStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 30,
+    paddingBottom: 30,
   },
   textInput: {
     borderWidth: 2,

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Text, View, TextInput, Dimensions } from 'react-native';
+import { Text, View, TextInput, Dimensions, ScrollView } from 'react-native';
 import Background from '../components/Bred';
 import screenStyles from '../components/styles/screenStyles';
 import SubmitReport from '../components/SubmitReport';
@@ -34,6 +34,7 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         onClose={() => navigateToScreen('Home')}
         isGuest={isGuest} // Pass the isGuest prop
       >
+        <ScrollView>
         <View style={screenStyles.container}>
           <Text style={screenStyles.text}>Type of Disaster:</Text>
           <ReportIcons />
@@ -48,16 +49,14 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
             style={{ ...screenStyles.textInput, height: 120 }}
             multiline={true}
           />
-          <View style={screenStyles.container}>
+          </View>
           <View style={screenStyles.rowContainer}>
-            <CameraCapture />
+            <CameraCapture style={screenStyles.capture} />
             <Text style={screenStyles.orText}>or</Text>
-            <GalleryUpload />
+            <GalleryUpload style={screenStyles.upload} />
           </View>
-          </View>
-
+          </ScrollView>
           <SubmitReport/>
-        </View>
       </AnimatedBottomSheet>
     </Background>
   );
