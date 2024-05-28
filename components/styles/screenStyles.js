@@ -179,6 +179,10 @@ const screenStyles = StyleSheet.create({
     width: '80%',
     height: 50,
   },
+  promptText: {
+    fontSize: 18,
+    marginVertical: 20,
+  },
 });
 
 export default screenStyles;

@@ -1,36 +1,78 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Dimensions } from 'react-native';
+import Background from '../components/Bred';
+import AnimatedBottomSheet from '../components/AnimatedBottomSheet';
+import screenStyles from '../components/styles/screenStyles';
 
-const Email = ({ onLogin }) => {
+const { height } = Dimensions.get('window');
+
+const Email = () => {
+  const [step, setStep] = useState(1); // 1: Enter Email, 2: Verify Email, 3: Email Sent
+  const [email, setEmail] = useState('');
+  const [isEmailSent, setIsEmailSent] = useState(false);
+
+  const handleContinue = () => {
+    setStep(2);
+  };
+
+  const handleSendVerification = () => {
+    setIsEmailSent(true);
+    setStep(3);
+  };
+
+  const handleResendVerification = () => {
+    setIsEmailSent(false);
+    setStep(2);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Email page</Text>
-      <TouchableOpacity style={styles.button} onPress={onLogin}>
-        <Text style={styles.buttonText}>Continue with email</Text>
-      </TouchableOpacity>
-    </View>
+    <Background>
+      <View style={screenStyles.conEmail}>
+        <Text style={screenStyles.title}>Continue with email</Text>
+      </View>
+      <AnimatedBottomSheet 
+        initialHeight={height * 0.8} 
+        expandedHeight={height}
+      >
+        <View style={screenStyles.container}>
+          {step === 1 && (
+            <View>
+              <Text style={screenStyles.promptText}>What's your email?</Text>
+              <TextInput
+                style={screenStyles.textInput}
+                placeholder="Email"
+                multiline={false}
+                value={email}
+                onChangeText={setEmail}
+              />
+              <TouchableOpacity style={screenStyles.button} onPress={handleContinue}>
+                <Text style={screenStyles.buttonText}>Continue</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {step === 2 && (
+            <View>
+              <Text style={screenStyles.promptText}>Verify your email address to get started</Text>
+              <TouchableOpacity style={screenStyles.button} onPress={handleSendVerification}>
+                <Text style={screenStyles.buttonText}>Send verification email</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {step === 3 && (
+            <View>
+              <Text style={screenStyles.promptText}>We've sent a verification link to {email}</Text>
+              <TouchableOpacity style={screenStyles.button} onPress={() => setIsEmailSent(true)}>
+                <Text style={screenStyles.buttonText}>Check inbox</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={screenStyles.button} onPress={handleResendVerification}>
+                <Text style={screenStyles.buttonText}>Resend verification link</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+        </AnimatedBottomSheet>
+    </Background>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  button: {
-    padding: 15,
-    backgroundColor: '#9D1111',
-    borderRadius: 10,
-  },
-  buttonText: {
-    color: '#FFF',
-    fontSize: 16,
-  },
-});
 
 export default Email;
