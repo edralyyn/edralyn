@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const { height } = Dimensions.get('window');
-const top40Height = height * 0.4;
 
 const screenStyles = StyleSheet.create({
   container: {
@@ -10,16 +9,56 @@ const screenStyles = StyleSheet.create({
     alignItems: 'center',
   },
   logocontainer: {
-    height: top40Height,
+    height: height * 0.4,
     justifyContent: 'center',
     alignItems: 'center',
   },
   logo: {
     position: 'absolute',
-    top: (top40Height / 2),
+    top: (height * 0.4 / 2),
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+
+
+
+  titlecontainer: {
+    minHeight: height * 0.8,
+    maxHeight: height * 0.8,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    margin: 10,
+    marginLeft: 30,
+  },
+  titleline1: {
+    position: 'absolute',
+    top: (height * 0.1 / 2),
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 25,
+    color: 'white',
+  },
+  titleline2: {
+    position: 'absolute',
+    top: (height * 0.15 / 2),
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 35,
+    fontWeight: '800',
+    color: 'white',
+  },
+
+
+
+
+
+
+
+
+
+
+
   buttonText: {
     color: 'white',
     fontSize: 16,
@@ -29,6 +68,9 @@ const screenStyles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     backgroundColor: 'white',
+    borderTopLeftRadius: 65,
+    borderTopRightRadius: 0,
+    padding: 10,
   },
   modalContainer: {
     flex: 1,
@@ -134,8 +176,8 @@ const screenStyles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'black',
     borderRadius: 16,
-    width: '80%', // Take up 80% of the screen width
-    height: 50, // Set height to 10 units
+    width: '80%',
+    height: 50,
   },
 });
 
