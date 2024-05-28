@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Dimensions, Image } from 'react-native';
 import Background from '../components/Bred';
 import AnimatedBottomSheet from '../components/AnimatedBottomSheet';
 import screenStyles from '../components/styles/screenStyles';
+import { ChevronLeftIcon } from 'react-native-heroicons/outline'
 
 const { height } = Dimensions.get('window');
 
@@ -27,8 +28,13 @@ const Email = () => {
 
   return (
     <Background>
-      <View className="flex-2 items-center justify-center mt-20">
-        <Text className="text-3xl text-white font-semibold">Continue with email</Text>
+      <View className="relative flex-row items-center mt-20">
+        <TouchableOpacity className="absolute left-5">
+          <ChevronLeftIcon size={30} color="white" />
+        </TouchableOpacity>
+        <View className="flex-1 items-center">
+          <Text className="text-3xl text-white font-semibold">Continue with email</Text>
+        </View>
       </View>
       <AnimatedBottomSheet 
         initialHeight={height * 0.8} 
@@ -37,6 +43,7 @@ const Email = () => {
         >
          <View className="flex-2 items-center justify-center">
           <View>
+            <Image className="w-24 h-24 mt-7 mb-7" source={require('../assets/email_icon.png')} />
           </View>
           {step === 1 && (
             <View className="items-center justify-center">
@@ -49,27 +56,29 @@ const Email = () => {
                 value={email}
                 onChangeText={setEmail}
               />
-            <TouchableOpacity className="items-center justify-center top-40 bg-[#800000] rounded-xl" onPress={handleContinue}>
+            <TouchableOpacity className="items-center justify-center bg-[#800000] rounded-xl mt-60" onPress={handleContinue}>
               <Text className="text-center border rounded-xl p-4 w-80 text-white">CONTINUE</Text>
             </TouchableOpacity>
             </View>
           )}
           {step === 2 && (
-            <View>
-              <Text style={screenStyles.promptText}>Verify your email address to get started</Text>
-              <TouchableOpacity style={screenStyles.button} onPress={handleSendVerification}>
-                <Text style={screenStyles.buttonText}>Send verification email</Text>
+            <View className="items-center justify-center">
+              <Text className="text-2xl font-bold text-center">Verify your email address to get started</Text>
+              <Text className="text-sm mt-2">This help us mitigate fraud and keep your personal data safe</Text>
+              <TouchableOpacity className="items-center justify-center bg-[#800000] rounded-xl mt-60" onPress={handleSendVerification}>
+                <Text className="text-center border rounded-xl p-4 w-80 text-white font-bold">Send verification email</Text>
               </TouchableOpacity>
             </View>
           )}
           {step === 3 && (
-            <View>
-              <Text style={screenStyles.promptText}>We've sent a verification link to {email}</Text>
-              <TouchableOpacity style={screenStyles.button} onPress={() => setIsEmailSent(true)}>
-                <Text style={screenStyles.buttonText}>Check inbox</Text>
+            <View className="items-center justify-center">
+              <Text className="text-2xl font-bold text-center">We've sent a verification link to {email}</Text>
+              <Text className="text-sm mt-2">Please click the verification link in your inbox</Text>
+              <TouchableOpacity className="items-center justify-center bg-[#800000] rounded-xl mt-60" onPress={() => setIsEmailSent(true)}>
+                <Text className="text-center border rounded-xl p-4 w-80 text-white font-bold">Check inbox</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={screenStyles.button} onPress={handleResendVerification}>
-                <Text style={screenStyles.buttonText}>Resend verification link</Text>
+              <TouchableOpacity className="items-center justify-center rounded-xl mt-70 mt-3" onPress={handleResendVerification}>
+                <Text className="text-center border rounded-xl p-4 w-80 text-[#800000] font-bold">Resend verification link</Text>
               </TouchableOpacity>
             </View>
           )}
