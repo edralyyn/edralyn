@@ -1,38 +1,59 @@
 // components/Navbar.js
 
 import React from 'react';
-import { View, TouchableOpacity, Button, Dimensions, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, StyleSheet, Image } from 'react-native';
 
 const BottomNavbar = ({ navigateToScreen }) => {
   const screenWidth = Dimensions.get('window').width;
 
   return (
     <View style={[styles.bottomNavbar, { width: screenWidth }]}>
-      <View style={{ flex: 1, maxWidth: screenWidth / 5 }}>
-        <Button title="Home" onPress={() => navigateToScreen('Home')} />
+      <View style={styles.navItem}>
+        <TouchableOpacity onPress={() => navigateToScreen('Home')}>
+          <Image style={styles.logo} source={require('../assets/homebutton.png')} />
+          <Text style={styles.navText}>Home</Text>
+        </TouchableOpacity>
       </View>
-      <View style={{ flex: 1, maxWidth: screenWidth / 5 }}>
-        <Button title="Screen 1" onPress={() => navigateToScreen('Screen1')} />
+      <View style={styles.navItem}>
+        <TouchableOpacity onPress={() => navigateToScreen('Screen1')}>
+          <Image style={styles.logo} source={require('../assets/callbutton.png')} />
+          <Text style={styles.navText}>Hotlines</Text>
+        </TouchableOpacity>
       </View>
-      <View style={[styles.circularContainer, { width: screenWidth / 5 }]}>
+      <View style={styles.circularContainer}>
         <TouchableOpacity
           onPress={() => navigateToScreen('Screen2')}
           style={styles.circularButton}
         >
-          <Button title="Screen 2" onPress={() => navigateToScreen('Screen2')} />
+          <Image style={styles.circularLogo} source={require('../assets/reportbutton.png')} />
+        </TouchableOpacity>
+        <Text style={styles.navText}>Report</Text>
+      </View>
+      <View style={styles.navItem}>
+        <TouchableOpacity onPress={() => navigateToScreen('Screen3')}>
+          <Image style={styles.logo} source={require('../assets/newsbutton.png')} />
+          <Text style={styles.navText}>News</Text>
         </TouchableOpacity>
       </View>
-      <View style={{ flex: 1, maxWidth: screenWidth / 5 }}>
-        <Button title="Screen 3" onPress={() => navigateToScreen('Screen3')} />
-      </View>
-      <View style={{ flex: 1, maxWidth: screenWidth / 5 }}>
-        <Button title="Screen 4" onPress={() => navigateToScreen('Screen4')} />
+      <View style={styles.navItem}>
+        <TouchableOpacity onPress={() => navigateToScreen('Screen4')}>
+          <Image style={styles.logo} source={require('../assets/notifbutton.png')} />
+          <Text style={styles.navText}>Notif</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  bottomNavbarContainer: {
+    position: 'absolute',
+    bottom: 0,
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    width: '100%',
+    height: 0, // Adjust this if needed to ensure the shadow is visible
+  },
   bottomNavbar: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -40,19 +61,48 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderTopWidth: 1,
     borderTopColor: 'gray',
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: '#fff', // Add background color to navbar
+    backgroundColor: '#fff',
+    height: 70, // Adjust this to fit the circular button properly
+    borderTopLeftRadius: 25, // Ensure the top corners are rounded
+    borderTopRightRadius: 25, // Ensure the top corners are rounded
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -3 }, // Negative height to create a shadow at the top
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5, // For Android shadow
+  },
+  navItem: {
+    flex: 1,
+    maxWidth: Dimensions.get('window').width / 5,
+    alignItems: 'center',
   },
   circularContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
-    borderRadius: Dimensions.get('window').width / 5 / 2, // Ensures it's a circle
+    position: 'relative',
+    top: -20, // Adjust this to position the button above the navbar
   },
   circularButton: {
-    width: '100%', // Take up the full width of the container
-    height: '100%', // Take up the full height of the container
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#d9534f',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 5, // Adds shadow for Android
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+  },
+  navText: {
+    color: 'black',
+    fontSize: 12,
+    marginTop: 2, // Adjust to give some space between the circular button and the text
+  },
+  logo: {
+    width: 24,
+    height: 24,
   },
 });
 
