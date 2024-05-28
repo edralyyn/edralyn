@@ -27,28 +27,31 @@ const Email = () => {
 
   return (
     <Background>
-      <View style={screenStyles.conEmail}>
-        <Text style={screenStyles.title}>Continue with email</Text>
+      <View className="flex-2 items-center justify-center mt-20">
+        <Text className="text-3xl text-white font-semibold">Continue with email</Text>
       </View>
       <AnimatedBottomSheet 
         initialHeight={height * 0.8} 
         expandedHeight={height}
         isGuest={true} // Ensure the close button is not rendered
-      >
-        <View style={screenStyles.container}>
+        >
+         <View className="flex-2 items-center justify-center">
+          <View>
+          </View>
           {step === 1 && (
-            <View>
-              <Text style={screenStyles.promptText}>What's your email?</Text>
+            <View className="items-center justify-center">
+              <Text className="text-2xl font-bold">What's your email?</Text>
+              <Text className="text-sm mt-2">We'll check if you have an account</Text>
               <TextInput
-                style={screenStyles.textInput}
+                className="border rounded-xl p-3 w-80 mt-4"
                 placeholder="Email"
                 multiline={false}
                 value={email}
                 onChangeText={setEmail}
               />
-              <TouchableOpacity style={screenStyles.button} onPress={handleContinue}>
-                <Text style={screenStyles.buttonText}>Continue</Text>
-              </TouchableOpacity>
+            <TouchableOpacity className="items-center justify-center top-40 bg-[#800000] rounded-xl" onPress={handleContinue}>
+              <Text className="text-center border rounded-xl p-4 w-80 text-white">CONTINUE</Text>
+            </TouchableOpacity>
             </View>
           )}
           {step === 2 && (
