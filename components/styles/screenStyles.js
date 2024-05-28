@@ -6,7 +6,9 @@ const screenStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    marginLeft: 40,
+    marginRight: 40,
   },
   logocontainer: {
     height: height * 0.4,
@@ -21,7 +23,12 @@ const screenStyles = StyleSheet.create({
   },
 
 
-
+  text: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: 'regular',
+    marginBottom: 5,
+  },
 
   titlecontainer: {
     minHeight: height * 0.8,
@@ -175,8 +182,8 @@ const screenStyles = StyleSheet.create({
   textInput: {
     borderWidth: 2,
     borderColor: 'black',
-    borderRadius: 16,
-    width: '80%',
+    borderRadius: 12,
+    width: '100%',
     height: 50,
   },
   promptText: {

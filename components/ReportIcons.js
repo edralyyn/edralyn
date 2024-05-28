@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start', // Align icons to the left side
+    marginBottom: 10,
   },
   iconContainer: {
     alignItems: 'center',

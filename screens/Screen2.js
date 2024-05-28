@@ -35,25 +35,28 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         isGuest={isGuest} // Pass the isGuest prop
       >
         <View style={screenStyles.container}>
-          <Text>Type of Disaster:</Text>
+          <Text style={screenStyles.text}>Type of Disaster:</Text>
           <ReportIcons />
-          <Text>Share Location</Text>
+          <Text style={screenStyles.text}>Share Location:</Text>
           <TextInput
-            style={screenStyles.textInput}
+            style={{ ...screenStyles.textInput, paddingStart: 15, marginBottom: 20 }}
             placeholder="Type location"
             multiline={true}
           />
-          <Text>Other details:</Text>
+          <Text style={screenStyles.text}>Other details:</Text>
           <TextInput
-            style={screenStyles.textInput}
+            style={{ ...screenStyles.textInput, height: 120 }}
             multiline={true}
           />
+          <View style={screenStyles.container}>
           <View style={screenStyles.rowContainer}>
             <CameraCapture />
             <Text style={screenStyles.orText}>or</Text>
             <GalleryUpload />
           </View>
-          <SubmitReport />
+          </View>
+
+          <SubmitReport/>
         </View>
       </AnimatedBottomSheet>
     </Background>
