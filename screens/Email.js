@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import Background from '../components/Bred';
 import AnimatedBottomSheet from '../components/AnimatedBottomSheet';
 import screenStyles from '../components/styles/screenStyles';
@@ -33,6 +33,7 @@ const Email = () => {
       <AnimatedBottomSheet 
         initialHeight={height * 0.8} 
         expandedHeight={height}
+        isGuest={true} // Ensure the close button is not rendered
       >
         <View style={screenStyles.container}>
           {step === 1 && (
@@ -70,7 +71,7 @@ const Email = () => {
             </View>
           )}
         </View>
-        </AnimatedBottomSheet>
+      </AnimatedBottomSheet>
     </Background>
   );
 };
