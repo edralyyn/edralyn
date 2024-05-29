@@ -1,47 +1,78 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Image, Dimensions } from 'react-native';
 import ReportIcons from '../components/ReportIcons';
-import screenStyles from '../components/styles/screenStyles';
+
+const { width, height } = Dimensions.get('window');
 
 const HomeScreen = ({ navigateToScreen }) => {
   return (
-    <View style={screenStyles.container}>
+    <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <View style={styles.textContainer}>
-          <Text style={[styles.text, { color: '#2A2D90', fontSize: 25, marginBottom: -5 }]}>Project</Text>
-          <Text style={[styles.text, { color: '#7B0000', marginTop: -5 }]}>
-            RE<Text style={{ color: '#FFB700', fontSize: 28 }}>SOLVE</Text>
-          </Text>
-        </View>
-        <Image source={require('../assets/logos.png')} style={styles.image} />
+        <Image source={require('../assets/resolve.png')} style={styles.image} resizeMode="contain" />
+        <Image source={require('../assets/logos.png')} style={styles.image} resizeMode="contain" />
       </View>
-      <TouchableOpacity style={screenStyles.button} onPress={() => navigateToScreen('Profile')}>
-        <Text style={screenStyles.buttonText}>Go to Profile</Text>
-      </TouchableOpacity>
+      <View style={styles.contentContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => navigateToScreen('Profile')}>
+          <ImageBackground
+            source={require('../assets/DP.png')}
+            style={styles.imageBackground}
+            resizeMode="cover"
+          />
+        </TouchableOpacity>
+        <View style={styles.textContainer}>
+          <Text style={{...styles.text, fontSize: 24}}>Hi, Xich</Text>
+          <Text style={styles.text}>+63901***2345</Text>
+        </View>
+      </View>
       <ReportIcons />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: width * 0.05,
+    backgroundColor: '#fff',
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 50,
+  },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 0,
   },
-  textContainer: {
-    flex: 1, // Take up remaining space
-    alignItems: 'flex-start', // Align the text to the end (right)
+  contentContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: -30,
   },
   image: {
-    width: 200, // Adjust width as needed
-    height: 100, // Adjust height as needed
+    height: height * 0.2,
+    width: '45%', // Adjust width to ensure the images don't overflow
+    marginBottom: 0,
+  },
+  button: {
+    alignSelf: 'center',
+  },
+  imageBackground: {
+    backgroundColor: '#2A2D90',
+    width: width * 0.15, // Set width and height to ensure the button is square
+    height: width * 0.15,
+    borderRadius: (width * 0.2) / 2, // Make button round by setting borderRadius to half of width
+    overflow: 'hidden', // Ensure the image stays within the rounded border
+  },
+  textContainer: {
+    flex: 1,
+    marginLeft: 20,
   },
   text: {
-    fontSize: 35,
-    fontWeight: '800',
-  }
+    fontSize: 16,
+    fontWeight: '600',
+  },
 });
 
 export default HomeScreen;

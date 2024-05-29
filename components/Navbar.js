@@ -16,8 +16,8 @@ const BottomNavbar = ({ navigateToScreen }) => {
       </View>
       <View style={styles.navItem}>
         <TouchableOpacity onPress={() => navigateToScreen('Screen1')}>
-          <Image style={styles.logo} source={require('../assets/callbutton.png')} />
-          <Text style={styles.navText}>Hotlines</Text>
+          <Image style={styles.logo} source={require('../assets/newsbutton.png')} />
+          <Text style={styles.navText}>News</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.circularContainer}>
@@ -31,14 +31,14 @@ const BottomNavbar = ({ navigateToScreen }) => {
       </View>
       <View style={styles.navItem}>
         <TouchableOpacity onPress={() => navigateToScreen('Screen3')}>
-          <Image style={styles.logo} source={require('../assets/newsbutton.png')} />
-          <Text style={styles.navText}>News</Text>
+          <Image style={styles.logo} source={require('../assets/notifbutton.png')} />
+          <Text style={styles.navText}>Notif</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.navItem}>
         <TouchableOpacity onPress={() => navigateToScreen('Screen4')}>
-          <Image style={styles.logo} source={require('../assets/notifbutton.png')} />
-          <Text style={styles.navText}>Notif</Text>
+          <Image style={styles.logo} source={require('../assets/profile.png')} />
+          <Text style={styles.navText}>Profile</Text>
         </TouchableOpacity>
       </View>
     </View>
