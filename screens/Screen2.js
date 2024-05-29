@@ -61,17 +61,19 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
               multiline={true}
             />
           </View>
-          <View style={screenStyles.container}>
-            <Text style={screenStyles.text}>Attachments:</Text>
-            {attachments.map(attachment => (
-              <View key={attachment.id} style={styles.attachment}>
-                <Image source={require('../assets/clip.png')}/>
-                <Text style={{marginStart: 5}}>
-                  {`Attachment ${attachment.id}: ${attachment.type === 'image' ? 'Image' : 'Video'}`}
-                </Text>
-              </View>
-            ))}
-          </View>
+          {attachments.length > 0 && (
+            <View style={screenStyles.container}>
+              <Text style={screenStyles.text}>Attachments:</Text>
+              {attachments.map(attachment => (
+                <View key={attachment.id} style={styles.attachment}>
+                  <Image source={require('../assets/clip.png')}/>
+                  <Text style={{marginStart: 5}}>
+                    {`Attachment ${attachment.id}: ${attachment.type === 'image' ? 'Image' : 'Video'}`}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          )}
           <View style={screenStyles.rowContainer}>
             <CameraCapture onCapture={handleAddAttachment} style={screenStyles.capture} />
             <Text style={screenStyles.orText}>or</Text>
