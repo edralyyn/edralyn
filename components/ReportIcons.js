@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native';
 
 const iconsData = [
@@ -17,17 +17,30 @@ const columns = 4;
 const buttonSize = (width - padding * 2 - margin * (columns * 2)) / columns;
 
 const ReportIcons = () => {
+  const [selectedIcon, setSelectedIcon] = useState(null);
+
+  const handleIconPress = (id) => {
+    setSelectedIcon(id);
+  };
+
   return (
-      <View style={styles.container}>
-        {iconsData.map((icon) => (
-          <View key={icon.id} style={styles.iconContainer}>
-            <TouchableOpacity style={[styles.button, { width: buttonSize, height: buttonSize }]}>
-              <Image source={icon.image} style={styles.icon} />
-            </TouchableOpacity>
-            <Text style={styles.text}>{icon.name}</Text>
-          </View>
-        ))}
-      </View>
+    <View style={styles.container}>
+      {iconsData.map((icon) => (
+        <View key={icon.id} style={styles.iconContainer}>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              { width: buttonSize, height: buttonSize },
+              selectedIcon === icon.id && styles.selectedButton,
+            ]}
+            onPress={() => handleIconPress(icon.id)}
+          >
+            <Image source={icon.image} style={styles.icon} />
+          </TouchableOpacity>
+          <Text style={styles.text}>{icon.name}</Text>
+        </View>
+      ))}
+    </View>
   );
 };
 
@@ -47,6 +60,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: buttonSize / 2,
+  },
+  selectedButton: {
+    shadowColor: '#CC4A4A',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    elevation: 8,
+    borderWidth: 3,
+    borderColor: '#CC4A4A',
   },
   icon: {
     width: buttonSize / 2,
