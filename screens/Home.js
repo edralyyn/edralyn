@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, FlatList, ImageBackground, StyleSheet, Image, Dimensions } from 'react-native';
 import ReportIcons from '../components/ReportIcons';
 
 const { width, height } = Dimensions.get('window');
 
 const HomeScreen = ({ navigateToScreen }) => {
   return (
+    <ScrollView>
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Image source={require('../assets/resolve.png')} style={styles.image} resizeMode="contain" />
@@ -25,18 +26,26 @@ const HomeScreen = ({ navigateToScreen }) => {
         </View>
       </View>
       <ReportIcons />
+      <View style={styles.container}>
+      <Image source={require('../assets/QRT AKO!.png')}/>
+      </View>
+      <Text>Suggested Websites</Text>
+      <FlatList></FlatList>
     </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    alignContent: 'center',
+    justifyContent: 'center',
     flex: 1,
     padding: width * 0.05,
     backgroundColor: '#fff',
     marginLeft: 20,
     marginRight: 20,
-    marginTop: 50,
+    marginTop: 50, // Apply marginTop only to the outermost container
   },
   headerContainer: {
     flexDirection: 'row',
@@ -48,7 +57,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: -30,
+    marginTop: -30, // Adjust as needed
   },
   image: {
     height: height * 0.2,
@@ -60,10 +69,10 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     backgroundColor: '#2A2D90',
-    width: width * 0.15, // Set width and height to ensure the button is square
+    width: width * 0.15,
     height: width * 0.15,
-    borderRadius: (width * 0.2) / 2, // Make button round by setting borderRadius to half of width
-    overflow: 'hidden', // Ensure the image stays within the rounded border
+    borderRadius: (width * 0.15) / 2,
+    overflow: 'hidden',
   },
   textContainer: {
     flex: 1,
@@ -74,5 +83,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
+
 
 export default HomeScreen;
