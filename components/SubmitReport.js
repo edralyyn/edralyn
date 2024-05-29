@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Text, TouchableOpacity, View, TouchableWithoutFeedback } from 'react-native';
+import { Modal, Text, TouchableOpacity, View, TouchableWithoutFeedback, Image, StyleSheet} from 'react-native';
 import screenStyles from '../components/styles/screenStyles';
 
 const SubmitReport = () => {
@@ -15,7 +15,7 @@ const SubmitReport = () => {
 
   return (
     <View>
-      <TouchableOpacity style={{ ...screenStyles.button, width: '70%', alignSelf: 'center' }}  onPress={submitReport}>
+      <TouchableOpacity style={{ ...screenStyles.button, width: '70%', alignSelf: 'center' }} onPress={submitReport}>
         <Text style={screenStyles.whiteText}>Submit</Text>
       </TouchableOpacity>
       <Modal
@@ -29,8 +29,9 @@ const SubmitReport = () => {
             <View style={screenStyles.modalOverlay} />
           </TouchableWithoutFeedback>
           <View style={screenStyles.modalContent}>
-            <Text style={screenStyles.modalText}>Report submitted!</Text>
-            <TouchableOpacity style={screenStyles.button} onPress={closeModal}>
+            <Image source={require('../assets/check.png')} style={styles.checkImage} />
+            <Text style={{...screenStyles.Text, fontWeight: 'bold', fontSize: '18'}}>Report submitted!</Text>
+            <TouchableOpacity style={{...screenStyles.button, margin: 0, marginTop: 40, paddingHorizontal: 120,}} onPress={closeModal}>
               <Text style={screenStyles.whiteText}>OK</Text>
             </TouchableOpacity>
           </View>
@@ -39,5 +40,14 @@ const SubmitReport = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  checkImage: {
+    width: 73,
+    height: 73,
+    margin: 10,
+    alignSelf: 'center',
+  },
+});
 
 export default SubmitReport;

@@ -177,10 +177,6 @@ const screenStyles = StyleSheet.create({
     borderColor: '#9D1111',
     borderWidth: 1,
   },
-  modalText: {
-    fontSize: 18,
-    marginBottom: 20,
-  },
   rowContainer: {
     flex: 1,
     flexDirection: 'row',
