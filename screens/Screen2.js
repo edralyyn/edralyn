@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Text, View, TextInput, Dimensions, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, TextInput, Dimensions, ScrollView, Image, StyleSheet } from 'react-native';
 import Background from '../components/Bred';
 import screenStyles from '../components/styles/screenStyles';
 import SubmitReport from '../components/SubmitReport';
@@ -12,6 +12,8 @@ import AnimatedBottomSheet from '../components/AnimatedBottomSheet';
 const { height } = Dimensions.get('window');
 
 const Screen2 = ({ navigateToScreen, isGuest }) => {
+  const [attachments, setAttachments] = useState([]);
+
   useEffect(() => {
     // Request camera permissions when component mounts
     (async () => {
@@ -21,6 +23,15 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
       }
     })();
   }, []);
+
+  const handleAddAttachment = (type, uris) => {
+    const newAttachments = uris.map((uri, index) => ({
+      id: attachments.length + index + 1,
+      type,
+      uri,
+    }));
+    setAttachments([...attachments, ...newAttachments]);
+  };
 
   return (
     <Background>
@@ -35,31 +46,55 @@ const Screen2 = ({ navigateToScreen, isGuest }) => {
         isGuest={isGuest} // Pass the isGuest prop
       >
         <ScrollView>
-        <View style={screenStyles.container}>
-          <Text style={screenStyles.text}>Type of Disaster:</Text>
-          <ReportIcons />
-          <Text style={screenStyles.text}>Share Location:</Text>
-          <TextInput
-            style={{ ...screenStyles.textInput, paddingStart: 15, marginBottom: 20 }}
-            placeholder="Type location"
-            multiline={true}
-          />
-          <Text style={screenStyles.text}>Other details:</Text>
-          <TextInput
-            style={{ ...screenStyles.textInput, height: 120 }}
-            multiline={true}
-          />
+          <View style={screenStyles.container}>
+            <Text style={screenStyles.text}>Type of Disaster:</Text>
+            <ReportIcons />
+            <Text style={screenStyles.text}>Share Location:</Text>
+            <TextInput
+              style={{ ...screenStyles.textInput, paddingStart: 15, marginBottom: 20 }}
+              placeholder="Type location"
+              multiline={true}
+            />
+            <Text style={screenStyles.text}>Other details:</Text>
+            <TextInput
+              style={{ ...screenStyles.textInput, height: 120, marginBottom: 20 }}
+              multiline={true}
+            />
+          </View>
+          <View style={screenStyles.container}>
+            <Text style={screenStyles.text}>Attachments:</Text>
+            {attachments.map(attachment => (
+              <View key={attachment.id} style={styles.attachment}>
+                <Image source={require('../assets/clip.png')}/>
+                <Text style={{marginStart: 5}}>
+                  {`Attachment ${attachment.id}: ${attachment.type === 'image' ? 'Image' : 'Video'}`}
+                </Text>
+              </View>
+            ))}
           </View>
           <View style={screenStyles.rowContainer}>
-            <CameraCapture style={screenStyles.capture} />
+            <CameraCapture onCapture={handleAddAttachment} style={screenStyles.capture} />
             <Text style={screenStyles.orText}>or</Text>
-            <GalleryUpload style={screenStyles.upload} />
+            <GalleryUpload onUpload={handleAddAttachment} style={screenStyles.upload} />
           </View>
-          </ScrollView>
-          <SubmitReport/>
+        </ScrollView>
+        <SubmitReport />
       </AnimatedBottomSheet>
     </Background>
   );
 };
+
+const styles = StyleSheet.create({
+  attachment: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 5,
+  },
+  clipIcon: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+  },
+});
 
 export default Screen2;

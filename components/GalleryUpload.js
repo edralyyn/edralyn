@@ -1,9 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, Text, Image } from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import screenStyles from '../components/styles/screenStyles';
 
-const GalleryUpload = () => {
+const GalleryUpload = ({ onUpload }) => {
   const handleGalleryOpen = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== 'granted') {
@@ -19,7 +18,7 @@ const GalleryUpload = () => {
       });
 
       if (!result.cancelled) {
-        console.log('Images selected: ', result.uris);
+        onUpload('image', result.selected ? result.selected.map(file => file.uri) : [result.uri]);
       }
     } catch (error) {
       console.error('Error selecting images:', error);
@@ -28,7 +27,7 @@ const GalleryUpload = () => {
 
   return (
     <TouchableOpacity onPress={handleGalleryOpen}>
-    <Image source={require('../assets/upload.png')} />
+      <Image source={require('../assets/upload.png')} />
     </TouchableOpacity>
   );
 };

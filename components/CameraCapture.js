@@ -1,9 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, Text, Image } from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import screenStyles from '../components/styles/screenStyles';
 
-const CameraCapture = () => {
+const CameraCapture = ({ onCapture }) => {
   const handleCapture = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== 'granted') {
@@ -18,19 +17,14 @@ const CameraCapture = () => {
     });
 
     if (!result.cancelled) {
-      if (result.type === 'image') {
-        console.log('Picture taken: ', result.uri);
-      } else if (result.type === 'video') {
-        console.log('Video taken: ', result.uri);
-      }
+      onCapture(result.type, [result.uri]);
     }
   };
 
   return (
-  <TouchableOpacity onPress={handleCapture}>
-  <Image source={require('../assets/capture.png')} />
-  </TouchableOpacity>
-
+    <TouchableOpacity onPress={handleCapture}>
+      <Image source={require('../assets/capture.png')} />
+    </TouchableOpacity>
   );
 };
 
