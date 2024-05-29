@@ -6,8 +6,7 @@ const iconsData = [
   { id: 2, name: 'Flood', image: require('../assets/flood.png') },
   { id: 3, name: 'Earthquake', image: require('../assets/earthquake.png') },
   { id: 4, name: 'Eruption', image: require('../assets/eruption.png') },
-  { id: 5, name: 'Landslide', image: require('../assets/landslide.png') },
-  { id: 6, name: 'Tornado', image: require('../assets/tornado.png') },
+  { id: 5, name: 'Others', image: require('../assets/others.png') },
 ];
 
 // Calculate button size based on screen width
