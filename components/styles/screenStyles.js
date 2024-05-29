@@ -132,7 +132,7 @@ const screenStyles = StyleSheet.create({
   button: {
     padding: 15,
     borderRadius: 10,
-    margin: 10,
+    margin: 25,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#800000',
