@@ -5,17 +5,19 @@ import ReportIcons from '../components/ReportIcons';
 const { width, height } = Dimensions.get('window');
 
 const websites = [
-  { id: 1, name: 'Website 1', url: 'https://www.dswd.gov.ph/', previewImage: require('../assets/dswd.png') },
-  { id: 2, name: 'Website 2', url: 'https://www.gov.ph/the-govph/', previewImage: require('../assets/gov.png') },
-  { id: 3, name: 'Website 3', url: 'https://car.dswd.gov.ph/programs-services/', previewImage: require('../assets/progs.png') },
+  { id: 1, name: 'DSWD Website', description: 'https://www.dswd.gov.ph/', url: 'https://www.dswd.gov.ph/', previewImage: require('../assets/dswd.png') },
+  { id: 2, name: 'Government Official Website', description: 'https://www.gov.ph/the-govph/', url: 'https://www.gov.ph/the-govph/', previewImage: require('../assets/gov.png') },
+  { id: 3, name: 'DSWD Programs', description: 'https://car.dswd.gov.ph/programs-services/', url: 'https://car.dswd.gov.ph/programs-services/', previewImage: require('../assets/progs.png') },
   // Add more websites as needed
 ];
 
 const WebsiteListItem = ({ item }) => (
   <TouchableOpacity style={styles.websiteCard} onPress={() => openWebsite(item.url)}>
-    <ImageBackground source={item.previewImage} style={styles.websitePreview} resizeMode="cover">
+    <ImageBackground source={item.previewImage} style={styles.websitePreview} resizeMode="cover" />
+    <View style={styles.websiteInfo}>
       <Text style={styles.websiteName}>{item.name}</Text>
-    </ImageBackground>
+      <Text style={styles.websiteDescription}>{item.description}</Text>
+    </View>
   </TouchableOpacity>
 );
 
@@ -41,7 +43,7 @@ const HomeScreen = ({ navigateToScreen }) => {
             />
           </TouchableOpacity>
           <View style={styles.textContainer}>
-            <Text style={{ ...styles.text, fontSize: 24 }}>Hi, Xich</Text>
+            <Text style={{ ...styles.text, fontSize: 24 }}>Hi, XICH</Text>
             <Text style={styles.text}>+63901***2345</Text>
           </View>
         </View>
@@ -119,29 +121,45 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 10,
     overflow: 'hidden',
+    width: 300, // Set the card width to 250
+    backgroundColor: '#fff',
+    elevation: 3, // Shadow for Android
+    shadowColor: '#000', // Shadow for iOS
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
+    borderWidth: 1, // Light border
+    borderColor: '#ccc', // Light border color
   },
   websitePreview: {
-    width: 150,
-    height: 100,
+    width: '100%',
+    aspectRatio: 16 / 9, // Maintain aspect ratio of the image
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
+  websiteInfo: {
+    paddingStart: 20,
+    padding: 5,
+    backgroundColor: '#fff',
+  },
   websiteName: {
-    color: '#fff',
+    color: '#000',
     fontSize: 16,
     fontWeight: 'bold',
-    padding: 5,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  websiteDescription: {
+    color: '#858484',
+    fontSize: 14,
   },
   imageContainer: {
-  alignItems: 'center', // Center the image horizontally
-},
-qrImage: {
-  width: '100%', // Adjust the width as needed
-  height: 200, // Adjust the height as needed
-  marginBottom: 20, // Add margin as needed
-  marginTop: -50,
-},
+    alignItems: 'center',
+  },
+  qrImage: {
+    width: '100%',
+    height: 200,
+    marginBottom: 20,
+    marginTop: -50,
+  },
 });
 
 export default HomeScreen;
