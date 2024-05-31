@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, ImageBackground } from 'react-native';
+import { View, ImageBackground, StyleSheet } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 
-const Background = ({ children }) => {
+const Background = ({ children, color }) => {
   const imageUrl = require('../assets/bgresolve.png');
+  const backgroundColorStyle = color ? { backgroundColor: color } : tw`bg-red-800`;
 
   return (
-    <View style={tw`flex-1 bg-red-800`}>
+    <View style={[tw`flex-1`, backgroundColorStyle]}>
       <ImageBackground
         source={imageUrl}
         style={tw`flex-1`}
