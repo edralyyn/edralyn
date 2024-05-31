@@ -1,6 +1,18 @@
+// News.js
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, Image } from 'react-native';
+import screenStyles from '../components/styles/screenStyles';
 
-const Screen4 = () => <Text>Hi, I'm Screen 4</Text>;
+const Screen4 = () => {
+    return (
+
+            <View style={screenStyles.container}>
+                <Text>
+                    Here is some news content.
+                </Text>
+            </View>
+    )
+}
 
 export default Screen4;
+
