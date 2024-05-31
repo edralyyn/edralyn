@@ -9,6 +9,7 @@ import Screen4 from './screens/Screen4';
 import BottomNavbar from './components/Navbar';
 import Email from './screens/Email';
 import ProfileScreen from './screens/Profile';
+import News from './screens/News';
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -41,11 +42,12 @@ export default function App() {
       ) : (
         <>
           {currentScreen === 'Home' && <HomeScreen navigateToScreen={navigateToScreen} />}
-          {currentScreen === 'Screen1' && <Screen1 />}
+          {currentScreen === 'Screen1' && <Screen1 navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Screen2' && <Screen2 hideNavbar={true} isGuest={isGuest} navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Screen3' && <Screen3 />}
           {currentScreen === 'Screen4' && <Screen4 />}
           {currentScreen === 'Profile' && <ProfileScreen />}
+          {currentScreen === 'News' && <News />}
           {currentScreen !== 'Screen2' && <BottomNavbar navigateToScreen={navigateToScreen} />}
         </>
       )}

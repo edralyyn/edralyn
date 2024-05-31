@@ -1,17 +1,14 @@
 // Screen1.js
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, Dimensions, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import Background from '../components/Bred';
 import screenStyles from '../components/styles/screenStyles';
-import News from './News';
 
 const { height } = Dimensions.get('window');
 
-const Screen1 = () => {
-  const [showNewsScreen, setShowNewsScreen] = useState(false);
-
+const Screen1 = ({ navigateToScreen }) => {
   const handleCardPress = () => {
-    setShowNewsScreen(true);
+    navigateToScreen('News');
   };
 
   return (
