@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import LoginScreen from './screens/Login';
 import HomeScreen from './screens/Home';
-import Screen1 from './screens/Screen1';
+import News from './screens/News';
 import Screen2 from './screens/Screen2';
 import Screen3 from './screens/Screen3';
 import Screen4 from './screens/Screen4';
 import BottomNavbar from './components/Navbar';
 import Email from './screens/Email';
 import ProfileScreen from './screens/Profile';
-import News from './screens/News';
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -42,12 +41,11 @@ export default function App() {
       ) : (
         <>
           {currentScreen === 'Home' && <HomeScreen navigateToScreen={navigateToScreen} />}
-          {currentScreen === 'Screen1' && <Screen1 navigateToScreen={navigateToScreen} />}
+          {currentScreen === 'News' && <News navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Screen2' && <Screen2 hideNavbar={true} isGuest={isGuest} navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Screen3' && <Screen3 />}
           {currentScreen === 'Screen4' && <Screen4 />}
           {currentScreen === 'Profile' && <ProfileScreen />}
-          {currentScreen === 'News' && <News />}
           {currentScreen !== 'Screen2' && <BottomNavbar navigateToScreen={navigateToScreen} />}
         </>
       )}
