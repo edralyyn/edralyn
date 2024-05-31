@@ -1,58 +1,82 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, Dimensions, StyleSheet, ScrollView } from 'react-native';
+// Screen1.js
+import React, { useState } from 'react';
+import { View, Text, Dimensions, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import Background from '../components/Bred';
 import screenStyles from '../components/styles/screenStyles';
-import axios from 'axios';
-import cheerio from 'cheerio-without-node-native';
+import News from './News';
 
 const { height } = Dimensions.get('window');
 
 const Screen1 = () => {
-  const [news, setNews] = useState([]);
+  const [showNewsScreen, setShowNewsScreen] = useState(false);
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await axios.get('https://kmportal.dswd.gov.ph/news');
-        const html = response.data;
-        const $ = cheerio.load(html);
-        const newsItems = [];
-
-        $('.news-item').each((index, element) => {
-          const title = $(element).find('.news-title').text().trim();
-          const description = $(element).find('.news-description').text().trim();
-          const link = $(element).find('a').attr('href');
-          newsItems.push({ title, description, link });
-        });
-
-        setNews(newsItems);
-      } catch (error) {
-        console.error('Error fetching news:', error);
-      }
-    };
-
-    fetchNews();
-  }, []);
+  const handleCardPress = () => {
+    setShowNewsScreen(true);
+  };
 
   return (
     <Background color="#128200">
-      <View style={screenStyles.titlecontainer}>
-        <Text style={screenStyles.titleline1}>DSWD NCR</Text>
-        <Text style={screenStyles.titleline2}>ANNOUNCEMENT</Text>
-      </View>
-      <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-          {news.map((item, index) => (
-            <View key={index} style={styles.card}>
-              <Text style={styles.cardTitle}>{item.title}</Text>
-              <Text style={styles.cardText}>{item.description}</Text>
-            </View>
-          ))}
-        </ScrollView>
-      </View>
-    </Background>
+    <View style={screenStyles.titlecontainer}>
+      <Text style={screenStyles.titleline1}>DSWD NCR</Text>
+      <Text style={screenStyles.titleline2}>ANNOUNCEMENT</Text>
+    </View>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+
+        <TouchableOpacity style={styles.card} onPress={handleCardPress}>
+          <Image source={require('../assets/news1.png')} style={styles.cardImage} />
+          <View style={styles.textcontainer}>
+            <Text style={styles.cardTitle}>WORLD SOCIAL WORK DAY</Text>
+            <Text style={styles.cardText}>Today, we celebrate the value and importance of social work around the world. In the most trying times, social workers step up; they do not choose the time or day to act, or whether their lives will be in danger or...</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.card} onPress={handleCardPress}>
+          <Image source={require('../assets/news2.png')} style={styles.cardImage} />
+          <View style={styles.textcontainer}>
+            <Text style={styles.cardTitle}>RELIEF MISSION</Text>
+            <Text style={styles.cardText}>Nagkaroon ng medical mission ang Rehabilitation Sheltered Workshop (RSW) at National Vocational Center (NVRC) sa pakikipag-ugnayan ng Armed Forces of the Philippines Health Service Command kasama...</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.card} onPress={handleCardPress}>
+          <Image source={require('../assets/news3.png')} style={styles.cardImage} />
+          <View style={styles.textcontainer}>
+            <Text style={styles.cardTitle}>DSWD NCR NAMAHAGI NG TULONG</Text>
+            <Text style={styles.cardText}>TINGNAN: Mula sa request para sa resource augmentation ng Pamahalaan ng Muntinlupa, ang DSWD NCR - Disaster Response Management Division av agarana namahagi na 963.</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.card} onPress={handleCardPress}>
+          <Image source={require('../assets/news1.png')} style={styles.cardImage} />
+          <View style={styles.textcontainer}>
+            <Text style={styles.cardTitle}>WORLD SOCIAL WORK DAY</Text>
+            <Text style={styles.cardText}>Today, we celebrate the value and importance of social work around the world. In the most trying times, social workers step up; they do not choose the time or day to act, or whether their lives will be in danger or...</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.card} onPress={handleCardPress}>
+          <Image source={require('../assets/news2.png')} style={styles.cardImage} />
+          <View style={styles.textcontainer}>
+            <Text style={styles.cardTitle}>RELIEF MISSION</Text>
+            <Text style={styles.cardText}>Nagkaroon ng medical mission ang Rehabilitation Sheltered Workshop (RSW) at National Vocational Center (NVRC) sa pakikipag-ugnayan ng Armed Forces of the Philippines Health Service Command kasama...</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.card} onPress={handleCardPress}>
+          <Image source={require('../assets/news3.png')} style={styles.cardImage} />
+          <View style={styles.textcontainer}>
+            <Text style={styles.cardTitle}>DSWD NCR NAMAHAGI NG TULONG</Text>
+            <Text style={styles.cardText}>TINGNAN: Mula sa request para sa resource augmentation ng Pamahalaan ng Muntinlupa, ang DSWD NCR - Disaster Response Management Division av agarana namahagi na 963.</Text>
+          </View>
+        </TouchableOpacity>
+
+      </ScrollView>
+    </View>
+  </Background>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -67,25 +91,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   card: {
-    backgroundColor: '#f9f9f9',
-    padding: 20,
+    backgroundColor: '#FAFAFA',
     marginVertical: 10,
     width: '90%',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    elevation: 2,
+    borderColor: '#858484',
+    borderWidth: 0.2,
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  cardImage: {
+    width: '100%',
+    height: 150,
+  },
+  textcontainer: {
+    flex: 1,
+    alignSelf: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 20,
   },
   cardTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
+    color: 'black',
+    fontWeight: '800',
+    alignSelf: 'flex-start'
   },
   cardText: {
-    fontSize: 16,
-    color: '#333',
+    fontSize: 14,
+    color: 'black',
+    alignSelf: 'flex-start'
   },
 });
 
