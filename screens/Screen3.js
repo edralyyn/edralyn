@@ -11,7 +11,7 @@ const Screen3 = () => {
             <Background>
             <View style={screenStyles.container}>
                 <Text style={styles.container}>
-                    Here is some news content.
+                    Here is some notif content.
                 </Text>
             </View>
             </Background>
@@ -20,6 +20,10 @@ const Screen3 = () => {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+        width: '100%',
+        margin: 0,
+        padding: 0,
         height: height * 0.7,
         backgroundColor: 'white',
         position: 'absolute',

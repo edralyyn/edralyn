@@ -3,7 +3,7 @@ import { StatusBar, StyleSheet, View } from 'react-native';
 import LoginScreen from './screens/Login';
 import HomeScreen from './screens/Home';
 import News from './screens/News';
-import Screen2 from './screens/Screen2';
+import Report from './screens/Report';
 import Screen3 from './screens/Screen3';
 import Screen4 from './screens/Screen4';
 import BottomNavbar from './components/Navbar';
@@ -24,7 +24,7 @@ export default function App() {
   const continueAsGuest = () => {
     setLoggedIn(true);
     setIsGuest(true);
-    setCurrentScreen('Screen2');
+    setCurrentScreen('Report');
   };
 
   const navigateToScreen = (screen) => {
@@ -42,11 +42,11 @@ export default function App() {
         <>
           {currentScreen === 'Home' && <HomeScreen navigateToScreen={navigateToScreen} />}
           {currentScreen === 'News' && <News navigateToScreen={navigateToScreen} />}
-          {currentScreen === 'Screen2' && <Screen2 hideNavbar={true} isGuest={isGuest} navigateToScreen={navigateToScreen} />}
+          {currentScreen === 'Report' && <Report hideNavbar={true} isGuest={isGuest} navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Screen3' && <Screen3 />}
           {currentScreen === 'Screen4' && <Screen4 />}
           {currentScreen === 'Profile' && <ProfileScreen />}
-          {currentScreen !== 'Screen2' && <BottomNavbar navigateToScreen={navigateToScreen} />}
+          {currentScreen !== 'Report' && <BottomNavbar navigateToScreen={navigateToScreen} />}
         </>
       )}
       <StatusBar style="auto" />

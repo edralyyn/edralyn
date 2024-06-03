@@ -22,7 +22,7 @@ const BottomNavbar = ({ navigateToScreen }) => {
       </View>
       <View style={styles.circularContainer}>
         <TouchableOpacity
-          onPress={() => navigateToScreen('Screen2')}
+          onPress={() => navigateToScreen('Report')}
           style={styles.circularButton}
         >
           <Image style={styles.circularLogo} source={require('../assets/reportbutton.png')} />

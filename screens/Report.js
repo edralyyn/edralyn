@@ -11,7 +11,7 @@ import AnimatedBottomSheet from '../components/AnimatedBottomSheet';
 
 const { height } = Dimensions.get('window');
 
-const Screen2 = ({ navigateToScreen, isGuest }) => {
+const Report = ({ navigateToScreen, isGuest }) => {
   const [attachments, setAttachments] = useState([]);
 
   useEffect(() => {
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Screen2;
+export default Report;
