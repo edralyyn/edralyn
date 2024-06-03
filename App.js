@@ -8,6 +8,7 @@ import Notif from './screens/Notif';
 import BottomNavbar from './components/Navbar';
 import Email from './screens/Email';
 import ProfileScreen from './screens/Profile';
+import EditProfile from './screens/EditProfile';
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -42,8 +43,8 @@ export default function App() {
           {currentScreen === 'Home' && <HomeScreen navigateToScreen={navigateToScreen} />}
           {currentScreen === 'News' && <News navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Report' && <Report hideNavbar={true} isGuest={isGuest} navigateToScreen={navigateToScreen} />}
-          {currentScreen === 'Notif' && <Notif />}
-          {currentScreen === 'Profile' && <ProfileScreen />}
+          {currentScreen === 'Profile' && <ProfileScreen navigateToScreen={navigateToScreen} />}
+          {currentScreen === 'EditProfile' && <EditProfile />}
           {currentScreen !== 'Report' && <BottomNavbar navigateToScreen={navigateToScreen} />}
         </>
       )}

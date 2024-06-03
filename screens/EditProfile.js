@@ -1,16 +1,31 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions, Image } from 'react-native';
 import Background from '../components/Bred';
 import screenStyles from '../components/styles/screenStyles';
 
 const { height } = Dimensions.get('window');
 
-const ProfileScreen = ({ navigateToScreen }) => {
+const EditProfile = () => {
+  const [editable, setEditable] = useState(false); // State to track if profile is editable
+  const [name, setName] = useState('Xich'); // State for name
+  const [password, setPassword] = useState(''); // State for password
+  const [age, setAge] = useState('24'); // State for age
+  const [sex, setSex] = useState('Male'); // State for sex
+  const [location, setLocation] = useState('Manila, Philippines'); // State for location
+  const [phone, setPhone] = useState('0912-345-6789'); // State for phone
+
+  const handleEdit = () => {
+    setEditable(!editable); // Toggle the editable state
+  };
+
   return (
     <Background color="#2E3192">
-      <View style={screenStyles.titlecontainer}>
-        <Text style={screenStyles.titleline1}>USER</Text>
-        <Text style={screenStyles.titleline2}>PROFILE</Text>
+      <View style={styles.titleContainer}>
+        <Image
+          source={require('../assets/backbutton.png')}
+          style={styles.backButton}
+        />
+        <Text style={styles.titleText}>Edit Profile</Text>
       </View>
       <View style={styles.container}>
         <Image
@@ -21,22 +36,8 @@ const ProfileScreen = ({ navigateToScreen }) => {
         <Text style={styles.DetailsText}>Manila, Philippines</Text>
         <Text style={{...styles.DetailsText, marginBottom: 30,}}>0912-345-6789</Text>
 
-        <TouchableOpacity style={{...styles.Button, backgroundColor: '#D72734',}}>
-          <Text style={styles.ButtonText}>TOTAL REPORTS</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{...styles.Button, backgroundColor: '#2A2D90',}}>
-          <Text style={styles.ButtonText}>USER BADGES</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={{...styles.Button, backgroundColor: '#EEBA00',}} 
-          onPress={() => navigateToScreen('EditProfile')}
-        >
+        <TouchableOpacity style={{...styles.Button, backgroundColor: '#EEBA00',}} onPress={handleEdit}>
           <Text style={styles.ButtonText}>Update User Account</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={{...styles.Button, backgroundColor: '#808080', marginTop: 25, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <Image source={require('../assets/logout.png')} style={screenStyles.buttonLogo} />
-          <Text style={styles.ButtonText}>Log Out</Text>
         </TouchableOpacity>
       </View>
     </Background>
@@ -44,8 +45,23 @@ const ProfileScreen = ({ navigateToScreen }) => {
 };
 
 const styles = StyleSheet.create({
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 20,
+  },
+  backButton: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
+  titleText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
   container: {
-    height: height * 0.75,
+    height: height * 0.8,
     backgroundColor: 'white',
     position: 'absolute',
     bottom: 0,
@@ -88,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default EditProfile;
