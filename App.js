@@ -5,7 +5,6 @@ import HomeScreen from './screens/Home';
 import News from './screens/News';
 import Report from './screens/Report';
 import Screen3 from './screens/Screen3';
-import Screen4 from './screens/Screen4';
 import BottomNavbar from './components/Navbar';
 import Email from './screens/Email';
 import ProfileScreen from './screens/Profile';
@@ -44,7 +43,6 @@ export default function App() {
           {currentScreen === 'News' && <News navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Report' && <Report hideNavbar={true} isGuest={isGuest} navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Screen3' && <Screen3 />}
-          {currentScreen === 'Screen4' && <Screen4 />}
           {currentScreen === 'Profile' && <ProfileScreen />}
           {currentScreen !== 'Report' && <BottomNavbar navigateToScreen={navigateToScreen} />}
         </>

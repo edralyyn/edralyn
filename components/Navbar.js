@@ -36,7 +36,7 @@ const BottomNavbar = ({ navigateToScreen }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.navItem}>
-        <TouchableOpacity onPress={() => navigateToScreen('Screen4')}>
+        <TouchableOpacity onPress={() => navigateToScreen('Profile')}>
           <Image style={styles.logo} source={require('../assets/profile.png')} />
           <Text style={styles.navText}>Profile</Text>
         </TouchableOpacity>
