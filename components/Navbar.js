@@ -30,7 +30,7 @@ const BottomNavbar = ({ navigateToScreen }) => {
         <Text style={styles.navText}>Report</Text>
       </View>
       <View style={styles.navItem}>
-        <TouchableOpacity onPress={() => navigateToScreen('Screen3')}>
+        <TouchableOpacity onPress={() => navigateToScreen('Notif')}>
           <Image style={styles.logo} source={require('../assets/notifbutton.png')} />
           <Text style={styles.navText}>Notif</Text>
         </TouchableOpacity>

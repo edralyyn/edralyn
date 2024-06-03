@@ -33,7 +33,7 @@ const notifications = [
     },
 ];
 
-const Screen3 = () => {
+const Notif = () => {
     const [activeButton, setActiveButton] = useState('');
 
     const filteredNotifications = notifications.filter(notification => 
@@ -171,4 +171,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Screen3;
+export default Notif;
