@@ -43,6 +43,7 @@ export default function App() {
           {currentScreen === 'Home' && <HomeScreen navigateToScreen={navigateToScreen} />}
           {currentScreen === 'News' && <News navigateToScreen={navigateToScreen} />}
           {currentScreen === 'Report' && <Report hideNavbar={true} isGuest={isGuest} navigateToScreen={navigateToScreen} />}
+          {currentScreen === 'Notif' && <Notif />}
           {currentScreen === 'Profile' && <ProfileScreen navigateToScreen={navigateToScreen} />}
           {currentScreen === 'EditProfile' && <EditProfile />}
           {currentScreen !== 'Report' && <BottomNavbar navigateToScreen={navigateToScreen} />}
