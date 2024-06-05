@@ -13,7 +13,7 @@ const LoginScreen = ({ onLogin, navigateToScreen, continueAsGuest }) => {
   return (
     <Background>
       <View style={screenStyles.logocontainer}>
-        <Image style={screenStyles.logo} source={require('../assets/logo_1.png')}/>
+        <Image style={screenStyles.logo} source={require('../assets/logo.png')}/>
       </View>
       <View style={screenStyles.bottomform}>
         {socialButtons.map(({ id, label, image, style }) => (

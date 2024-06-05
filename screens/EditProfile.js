@@ -18,6 +18,11 @@ const EditProfile = () => {
     setEditable(!editable); // Toggle the editable state
   };
 
+  const handleSave = () => {
+    // Logic to save the updated profile details
+    setEditable(false);
+  };
+
   return (
     <Background color="#2E3192">
       <View style={styles.titleContainer}>
@@ -28,16 +33,51 @@ const EditProfile = () => {
         <Text style={styles.titleText}>Edit Profile</Text>
       </View>
       <View style={styles.container}>
-        <Image
-          source={require('../assets/DP.png')}
-          style={styles.profileImage}
+        <View style={styles.profileContainer}>
+          <Image
+            source={require('../assets/DP.png')}
+            style={styles.profileImage}
+          />
+          <TouchableOpacity style={styles.editButton}>
+            <Image source={require('../assets/edit.png')} style={styles.editIcon} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.inputContainer}>
+        <Text style={styles.text}>Full Name</Text>
+        <TextInput
+          style={styles.input}
+          value={name}
+          editable={editable}
+          onChangeText={setName}
         />
-        <Text style={styles.nameText}>XICH</Text>
-        <Text style={styles.DetailsText}>Manila, Philippines</Text>
-        <Text style={{...styles.DetailsText, marginBottom: 30,}}>0912-345-6789</Text>
+        <Text style={styles.text}>Passsword</Text>
+        <TextInput
+          style={styles.input}
+          value={password}
+          editable={editable}
+          onChangeText={setPassword}
+          secureTextEntry
+          placeholder="Password"
+        />
+        <Text style={styles.text}>Age</Text>
+        <TextInput
+          style={styles.input}
+          value={age}
+          editable={editable}
+          onChangeText={setAge}
+          keyboardType="numeric"
+        />
+        <Text style={styles.text}>Sex</Text>
+        <TextInput
+          style={styles.input}
+          value={sex}
+          editable={editable}
+          onChangeText={setSex}
+        />
+        </View>
 
-        <TouchableOpacity style={{...styles.Button, backgroundColor: '#EEBA00',}} onPress={handleEdit}>
-          <Text style={styles.ButtonText}>Update User Account</Text>
+        <TouchableOpacity style={{ ...styles.Button, backgroundColor: '#EEBA00', }} onPress={editable ? handleSave : handleEdit}>
+          <Text style={styles.ButtonText}>{editable ? 'Save Changes' : 'Update User Account'}</Text>
         </TouchableOpacity>
       </View>
     </Background>
@@ -49,6 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 20,
+    paddingVertical: 50,
   },
   backButton: {
     width: 24,
@@ -59,6 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#FFFFFF',
+    justifyContent: 'center',
   },
   container: {
     height: height * 0.75,
@@ -69,31 +111,41 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
   },
-  profileImage: {
-    width: 200,
-    height: 200,
-    borderRadius: 60,
+  profileContainer: {
+    position: 'relative',
     marginBottom: 30,
-    marginTop: 10,
+    marginTop: 20,
   },
-  nameText: {
-    fontSize: 24,
-    fontWeight: '800',
-    marginBottom: 5,
-    textAlign: 'center',
+  profileImage: {
+    width: 180,
+    height: 180,
+    borderRadius: 100,
   },
-  DetailsText: {
-    fontSize: 18,
-    color: 'black',
-    fontWeight: '600',
-    marginBottom: -2,
-    textAlign: 'center',
+  editButton: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 2,
+  },
+  editIcon: {
+    width: 40,
+    height: 40,
+  },
+  input: {
+    width: '100%',
+    padding: 10,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginBottom: 20,
+    fontSize: 16,
   },
   Button: {
-    backgroundColor: '#FF0000',
-    paddingVertical: 16,
+    paddingVertical: 12,
     borderRadius: 12,
-    width: '55%',
+    width: '85%',
     alignItems: 'center',
     marginBottom: 12,
   },
@@ -102,6 +154,18 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '800',
   },
+  text: {
+    fontSize : 16,
+    fontWeight: '800',
+    color: 'black',
+    alignSelf: 'flex-start',
+    marginBottom: 5,
+  },
+  inputContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    width: '85%'
+  }
 });
 
 export default EditProfile;
